@@ -7,57 +7,36 @@
     <title>VueJS</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-    <script src="vue.js"></script>
-    <!--script src="jquery.js"></script-->
+    <link rel="stylesheet" href="./src/css/vuetify.min.css">
 </head>
 
 <body>
+    <script src="./src/js/axios.min.js"></script>
+    <script src="./src/js/vue.js"></script>
+    <script src="./src/js/vuetify.min.js"></script>
+    <script src="./src/components/topbar.vue.js"></script>
 
     <div id="app">
-        <input type="text" v-model="name">
-        <p>{{ name }}</p>
-        <button v-on:click="counter++">Increase</button>
-        <button v-on:click="counter--">Decrease</button>
-        <button v-on:click="secondCounter++">Increase Second</button>
-        <p>Counter: {{ counter }} | {{ secondCounter }}</p>
-        <p>Result: {{ result() }} | {{ output }}</p>
-        <hr>
+        <v-app>
+            <v-topbar-part></v-topbar-part>
+            <v-container>
+                <v-layout row>
+                    <v-text-field label="Name" v-model="name">
+                </v-layout>
+                <p>{{ name }}</p>
+                <v-layout row>
+                    <v-btn color="primary" v-on:click="counter++">Increase</v-btn>
+                    <v-btn color="primary" v-on:click="counter--">Decrease</v-btn>
+                    <v-btn color="primary" v-on:click="secondCounter++">Increase Second</v-btn>
+                </v-layout>
+                <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+                <p>Result: {{ result() }} | {{ output }}</p>
+                <hr>
+            </v-container>
+        </v-app>
     </div>
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                counter: 0,
-                secondCounter: 0,
-                name: '',
-            },
-            computed: {
-                output: function () {
-                    console.log('computed');
-                    return this.counter > 5 ? "Greater than 5" : "Smaller than 5";
-                },
-            },
-            watch: {
-                counter: function () {
-                    let vm = this;
-                    setTimeout(function () {
-                        vm.counter = 0;
-                    }, 5000);
-                },
-            },
-            methods: {
-                result: function () {
-                    console.log('method()');
-                    return this.counter > 5 ? "Greater than 5" : "Smaller than 5";
-                },
-                updateName: function() {
-                    
-                },
-            },
-        });
-    </script>
+    <script src="./src/js/app.js"></script>
 
 </body>
 
