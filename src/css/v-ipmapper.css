@@ -1,0 +1,14 @@
+[v-cloak] > * {
+    display: none;
+    height: 100vh;
+}
+
+[v-cloak]::before {
+    content: "Loading...";
+    height: 100vh;
+    cursor: wait;
+}
+
+html body .m-b-90 {
+    margin-bottom: 90px;
+}
