@@ -1,4 +1,4 @@
-var componentVTopbarPart = {     
+let componentVTopbarPart = {     
     template: `
     <div class="m-b-90">
       <v-toolbar dark color="primary" fixed app> 
