@@ -1,4 +1,4 @@
-var componentVSelectProviderCard = { 
+let componentVSelectProviderCard = { 
     template: `
     <v-layout justify-center row>
         <v-flex md8 elevation-5>
