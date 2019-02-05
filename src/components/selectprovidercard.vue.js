@@ -15,14 +15,14 @@ let componentVSelectProviderCard = {
             </v-card>
             <v-card>
                 <v-card-title class="justify-center">
-                    <div md4 align-center>
+                    <v-flex md4 align-center>
                         <v-select :searchable=false :options="apiProviders">
                             <template slot="option" slot-scope="option">
                                 {{ option.label }}
                                 <span class="mdi red--text" :class="option.icon"></span>                                
                             </template>
                         </v-select>
-                    </div>
+                    </v-flex>
                 </v-card-title>
             </v-card>
         </v-flex>
