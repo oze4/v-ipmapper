@@ -49,5 +49,5 @@ let componentVSelectProviderCard = {
     mounted: function () {
         return {};
     },
-    methods: {};
+    methods: {}
 }
