@@ -1,7 +1,8 @@
 
 /**
  *
- *  https://github.com/sagalbot/vue-select
+ *  FROM:    https://github.com/sagalbot/vue-select
+ *  LICENSE: https://github.com/sagalbot/vue-select/blob/master/LICENSE.md
  *
  */
 
