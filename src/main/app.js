@@ -15,9 +15,6 @@ new Vue({
                 icon: "mdi-key"
             },
         ],
-        /*counter: 0,
-        secondCounter: 0,
-        name: '',*/
     },
     computed: {
         /*result: function () {
