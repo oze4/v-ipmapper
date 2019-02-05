@@ -1,6 +1,6 @@
-Vue.component("v-topbar-part", {
+var componentVTopbarPart = {     
     template: `
-    <div style="margin-bottom:90px;">
+    <div class="m-b-90">
       <v-toolbar dark color="primary" fixed app> 
         <v-spacer></v-spacer>
             <a href="https://github.com/oze4" rel="noopener noreferrer" target="_blank" style="margin-top:5px;">
@@ -18,4 +18,4 @@ Vue.component("v-topbar-part", {
     methods: {
 
     }
-})
+}
