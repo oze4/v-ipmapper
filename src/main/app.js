@@ -2,11 +2,19 @@ Vue.component('v-select', VueSelect.VueSelect)
 
 new Vue({
     el: '#root',
-    components: {  
+    components: {
         'v-topbar-part': componentVTopbarPart,
-        'v-select-provider-card': componentVSelectProviderCard,     
+        'v-select-provider': componentVSelectProviderCard,
     },
     data: {
+        providers: [{
+                label: "http://ip-api.com",
+            },
+            {
+                label: "http://ipstack.com",
+                icon: "mdi-key"
+            },
+        ],
         /*counter: 0,
         secondCounter: 0,
         name: '',*/
