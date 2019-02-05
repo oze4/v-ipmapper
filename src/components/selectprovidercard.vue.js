@@ -38,7 +38,7 @@ let componentVSelectProviderCard = {
             default: " means API key is required",
         },
         apiproviders: {
-            type: Object,
+            type: Array,
         },
     },
     data: function () {
