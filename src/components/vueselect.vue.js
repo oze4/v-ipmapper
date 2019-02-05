@@ -1,3 +1,10 @@
+
+/**
+ *
+ *  https://github.com/sagalbot/vue-select
+ *
+ */
+
 ! function (t, e) {
     "object" == typeof exports && "object" == typeof module ? module.exports = e() : "function" == typeof define && define.amd ? define([], e) : "object" == typeof exports ? exports.VueSelect = e() : t.VueSelect = e()
 }(this, function () {
