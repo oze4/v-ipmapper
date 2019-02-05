@@ -13,5 +13,5 @@ let componentVTopbarPart = {
     mounted: function () {
         return {};
     },
-    methods: {};
+    methods: {}
 }
