@@ -1,33 +1,50 @@
-Vue.component('v-select-provider-card', {
+var componentVSelectProviderCard = { 
     template: `
     <v-layout justify-center row>
         <v-flex md8 elevation-5>
             <v-card class="grey lighten-3">
                 <v-card-title class="justify-center">
-                    <div md4>
-                        <h2>{{ title }}</h2>
-                        <small>{{ subTitle }}</small>
-                    </div>
+                    <v-flex md4 text-md-center>
+                        <h2>{{ title }}</h2>    
+                        <small>
+                            <span class="mdi mdi-key red--text"></span>
+                            {{ subTitle }}
+                        </small>                                         
+                    </v-flex>
                 </v-card-title>
             </v-card>
             <v-card>
                 <v-card-title class="justify-center">
-                    <v-flex md4>
-                        <v-select solo>
+                    <v-flex md4 align-center>
+                        <v-select :searchable=false :options="apiProviders">
+                            <template slot="option" slot-scope="option">
+                                {{ option.label }}
+                                <span class="mdi red--text" :class="option.icon"></span>                                
+                            </template>
                         </v-select>
                     </v-flex>
                 </v-card-title>
             </v-card>
         </v-flex>
-    </v-layout>  
+    </v-layout> 
     `,
     data: function () {
         return {
+            selectedProvider: '',
             title: "Select API Provider",
-            subTitle: "KEY means API key is required"
+            subTitle: " means API key is required",
+            apiProviders: [{
+                    label: "http://ip-api.com",
+                },
+                {
+                    label: "http://ipstack.com",
+                    icon: "mdi-key"
+                },
+            ],
         };
     },
     mounted: function () {
+        let vm = this;
         return {
 
         };
@@ -35,4 +52,4 @@ Vue.component('v-select-provider-card', {
     methods: {
 
     }
-})
+}
