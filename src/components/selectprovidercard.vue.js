@@ -1,24 +1,37 @@
 Vue.component('v-select-provider-card', {
     template: `
-    <v-layout align-start justify-center row>
+    <v-layout justify-center row>
         <v-flex md8 elevation-5>
             <v-card class="grey lighten-3">
                 <v-card-title class="justify-center">
-                    <h2>Please select IP API Provider</h2>
+                    <div md4>
+                        <h2>{{ title }}</h2>
+                        <small>{{ subTitle }}</small>
+                    </div>
                 </v-card-title>
-                <v-sheet d-flex height="70px">
-                    <v-card-title class="layout justify-center">
-                        <h2>Please select IP API Provider</h2>
-                    </v-card-title>
-                </v-sheet>
+            </v-card>
+            <v-card>
+                <v-card-title class="justify-center">
+                    <v-flex md4>
+                        <v-select solo>
+                        </v-select>
+                    </v-flex>
+                </v-card-title>
             </v-card>
         </v-flex>
-    </v-layout>    
+    </v-layout>  
     `,
-    /*data() {
-        
-    },*/
-    mounted() {},
+    data: function () {
+        return {
+            title: "Select API Provider",
+            subTitle: "KEY means API key is required"
+        };
+    },
+    mounted: function () {
+        return {
+
+        };
+    },
     methods: {
 
     }
