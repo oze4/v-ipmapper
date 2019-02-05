@@ -1,4 +1,4 @@
-let componentVSelectProviderCard = { 
+let componentVSelectProviderCard = {
     template: `
     <v-layout justify-center row>
         <v-flex md8 elevation-5>
@@ -8,7 +8,7 @@ let componentVSelectProviderCard = {
                         <h2>{{ title }}</h2>    
                         <small>
                             <span class="mdi mdi-key red--text"></span>
-                            {{ subTitle }}
+                            {{ subtitle }}
                         </small>                                         
                     </div>
                 </v-card-title>
@@ -16,10 +16,10 @@ let componentVSelectProviderCard = {
             <v-card>
                 <v-card-title class="justify-center">
                     <v-flex sm4 align-center justify-center>
-                        <v-select v-model="selectedProvider" v-bind:searchable=false v-bind:options="apiProviders">
+                        <v-select v-model="selectedProvider" v-bind:searchable=false v-bind:options="apiproviders">
                             <template slot="option" slot-scope="option">
                                 {{ option.label }}
-                                <span class="mdi red--text" :class="option.icon"></span>                                
+                                <span class="mdi red--text" v-bind:class="option.icon"></span>                                
                             </template>
                         </v-select>
                     </v-flex>
@@ -28,28 +28,26 @@ let componentVSelectProviderCard = {
         </v-flex>
     </v-layout> 
     `,
+    props: {
+        title: {
+            type: String,
+            default: "Select API Provider",
+        },
+        subtitle: {
+            type: String,
+            default: " means API key is required",
+        },
+        apiproviders: {
+            type: Object,
+        },
+    },
     data: function () {
         return {
             selectedProvider: '',
-            title: "Select API Provider",
-            subTitle: " means API key is required",
-            apiProviders: [{
-                    label: "http://ip-api.com",
-                },
-                {
-                    label: "http://ipstack.com",
-                    icon: "mdi-key"
-                },
-            ],
         };
     },
     mounted: function () {
-        let vm = this;
-        return {
-
-        };
+        return {};
     },
-    methods: {
-
-    }
+    methods: {};
 }
