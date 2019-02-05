@@ -1,8 +1,10 @@
-
 /**
  *
  *  FROM:    https://github.com/sagalbot/vue-select
  *  LICENSE: https://github.com/sagalbot/vue-select/blob/master/LICENSE.md
+ *
+ *  The MIT License (MIT)
+ *  Copyright (c) 2016 Jeff Sagal & vue-select contributors
  *
  */
 
