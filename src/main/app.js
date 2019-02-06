@@ -18,5 +18,10 @@ new Vue({
     },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {
+        alertMe: function () {
+            console.log('hi');
+            alert('hi');
+        },
+    },
 });
