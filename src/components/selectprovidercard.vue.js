@@ -52,7 +52,6 @@ let componentVSelectProviderCard = {
     methods: {
         logVal: function (val) {
             console.log(val.label);
-            alert(val.label);
         },
     },
 }
