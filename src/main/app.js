@@ -16,12 +16,11 @@ new Vue({
             },
         ],
     },
-    computed: {},
-    watch: {},
-    methods: {
-        alertMe: function () {
-            console.log('hi');
-            alert('hi');
-        },
+    computed: {
+        logMe: function () {
+            console.log('changed');
+        }
     },
+    watch: {},
+    methods: {},
 });
