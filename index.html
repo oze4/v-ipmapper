@@ -20,7 +20,7 @@
         <v-app>
             <v-topbar-part></v-topbar-part>
             <v-container>
-                <v-select-provider v-bind:apiproviders="providers"></v-select-provider>
+                <v-select-provider v-on:selectionChanged="alertMe()" v-bind:apiproviders="providers"></v-select-provider>
             </v-container>
         </v-app>
     </div>
