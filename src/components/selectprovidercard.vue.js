@@ -16,7 +16,7 @@ let componentVSelectProviderCard = {
             <v-card>
                 <v-card-title class="justify-center">
                     <v-flex sm4 align-center justify-center>
-                        <v-select v-model="selectedProvider" v-bind:searchable=false v-bind:options="apiproviders">
+                        <v-select v-on:onChange="$emit('selectionChanged')" v-model="selectedProvider" v-bind:searchable=false v-bind:options="apiproviders">
                             <template slot="option" slot-scope="option">
                                 {{ option.label }}
                                 <span class="mdi red--text" v-bind:class="option.icon"></span>                                
@@ -43,7 +43,7 @@ let componentVSelectProviderCard = {
     },
     data: function () {
         return {
-            selectedProvider: '',
+            selectedProvider: "",
         };
     },
     mounted: function () {
