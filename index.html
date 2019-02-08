@@ -8,10 +8,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="16x16" href="./docs/img/vue.png">
-    <link rel="stylesheet" href="./src/fonts/material-icons.css">
-    <link rel="stylesheet" href="./src/icons/materialdesignicons.min.css">
-    <link rel="stylesheet" href="./src/css/vuetify.min.css">
-    <link rel="stylesheet" href="./src/css/v-ipmapper.css">
+    <link rel="stylesheet" href="./src/assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="./src/assets/icons/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./src/assets/css/vuetify.min.css">
+    <link rel="stylesheet" href="./src/assets/css/v-ipmapper.css">
 </head>
 
 <body>
@@ -20,19 +20,46 @@
         <v-app>
             <v-topbar-part></v-topbar-part>
             <v-container>
-                <v-select-provider v-on:selectionChanged="alertMe()" v-bind:apiproviders="providers"></v-select-provider>
+                <v-select-provider @provider-changed="logProvider" :apiproviders="providers"></v-select-provider>
             </v-container>
         </v-app>
     </div>
 
-    <script src="./src/js/axios.min.js"></script>
-    <script src="./src/js/vue.js"></script>
-    <script src="./src/js/vuetify.min.js"></script>
+    <script src="./src/assets/js/axios.min.js"></script>
+    <script src="./src/assets/js/vue.js"></script>
+    <script src="./src/assets/js/vuetify.min.js"></script>
 
     <script src="./src/components/topbar.vue.js"></script>
     <script src="./src/components/selectprovidercard.vue.js"></script>
     <script src="./src/components/vueselect.vue.js"></script>
-    <script src="./src/main/app.js"></script>
+
+    <script type="text/javascript">
+        Vue.component('v-select', VueSelect.VueSelect)
+        new Vue({
+            el: '#root',
+            components: {
+                'v-topbar-part': componentVTopbarPart,
+                'v-select-provider': componentVSelectProviderCard,
+            },
+            data: {
+                providers: [{
+                        label: "http://ip-api.com",
+                    },
+                    {
+                        label: "http://ipstack.com",
+                        icon: "mdi-key"
+                    },
+                ],
+            },
+            computed: {},
+            watch: {},
+            methods: {
+                logProvider: function (val) {
+                    console.log(val.label);
+                },
+            },
+        });
+    </script>
 
 </body>
 
