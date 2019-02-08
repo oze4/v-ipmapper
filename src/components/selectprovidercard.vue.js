@@ -16,7 +16,7 @@ let componentVSelectProviderCard = {
             <v-card>
                 <v-card-title class="justify-center">
                     <v-flex sm4 align-center justify-center>
-                        <v-select :value.sync="selected" :on-change="logVal" v-bind:searchable=false v-bind:options="apiproviders">
+                        <v-select @input="providerChanged" :searchable=false :options="apiproviders">
                             <template slot="option" slot-scope="option">
                                 {{ option.label }}
                                 <span class="mdi red--text" v-bind:class="option.icon"></span>                                
@@ -24,6 +24,7 @@ let componentVSelectProviderCard = {
                         </v-select>
                     </v-flex>
                 </v-card-title>
+                <span v-html="selectedOption"> </span>
             </v-card>
         </v-flex>
     </v-layout> 
@@ -43,15 +44,21 @@ let componentVSelectProviderCard = {
     },
     data: function () {
         return {
-            selected: "",
-        };
+            selectedOption: "",
+        }
     },
     mounted: function () {
         return {};
     },
+    computed: {},
     methods: {
-        logVal: function (val) {
-            console.log(val.label);
+        providerChanged: function (val) {
+            if (val != null) { 
+                this.selectedOption = "&#8594; " + val.label + " &#8592;" ;
+                this.$emit('provider-changed', val);
+            } else {
+                this.selectedOption = '';
+            }
         },
     },
 }
