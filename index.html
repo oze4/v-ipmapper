@@ -18,8 +18,8 @@
 
     <div id="root" v-cloak>
         <v-app>
-            <v-topbar></v-topbar>
             <v-content>
+                <v-topbar></v-topbar>
                 <v-select-provider @provider-changed="logProvider" :api_providers="providers"></v-select-provider>
             </v-content>
         </v-app>
