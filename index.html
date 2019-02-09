@@ -22,7 +22,10 @@
                 <v-topbar></v-topbar>
                 <v-container fill-height>
                     <v-layout justify-space-around wrap>
-                        <v-select-provider @provider-changed="logProvider" :api_providers="providers"></v-select-provider>
+                        <v-select-provider 
+                            @provider-changed="logProvider" 
+                            :api_providers="providers"
+                        ></v-select-provider>
                     </v-layout>
                 </v-container>
             </v-content>
@@ -35,34 +38,7 @@
 
     <script src="./src/components/topbar.vue.js"></script>
     <script src="./src/components/select-provider.vue.js"></script>
-
-    <script type="text/javascript">
-        new Vue({
-            el: '#root',
-            components: {
-                'v-topbar': topbar,
-                'v-select-provider': select_provider,
-            },
-            data: {
-                providers: [{
-                        label: "http://ip-api.com",
-                        keyRequired: false,
-                    },
-                    {
-                        label: "http://ipstack.com",
-                        keyRequired: true,
-                    },
-                ],
-            },
-            computed: {},
-            watch: {},
-            methods: {
-                logProvider: function (val) {
-                    console.log(val);
-                },
-            },
-        });
-    </script>
+    <script src="./main.js"></script>
 
 </body>
 
