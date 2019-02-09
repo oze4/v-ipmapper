@@ -1,14 +1,3 @@
-/*[v-cloak] > * {
-    display: none;
-    height: 100vh;
-}
-
-[v-cloak]::before {
-    content: "Loading...";
-    height: 100vh;
-    cursor: wait;
-}*/
-
 [v-cloak] {
     display: block;
     padding: 50px 0;
