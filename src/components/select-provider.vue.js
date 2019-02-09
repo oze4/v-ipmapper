@@ -6,8 +6,7 @@ let select_provider = {
                 <v-flex lg4 justify-center>
                     <v-select 
                         label="Select API Provider"
-                        v-model="selectedProvider" 
-                        @input="providerChanged" 
+                        @change="providerChanged" 
                         :items="api_providers" 
                         item-text="label"
                         :clearable=true
@@ -47,16 +46,14 @@ let select_provider = {
         },
     },
     data: function () {
-        return {
-            selectedProvider: '',
-        }
+        return {}
     },
-    computed: {
-        providerChanged: function () {
-            if (this.selectedProvider !== '' && this.selectedProvider !== undefined) {
-                this.$emit('provider-changed', this.selectedProvider);
+    computed: {},
+    methods: {
+        providerChanged: function (val) {
+            if (val !== '' && val !== undefined) {
+                this.$emit('provider-changed', val);
             }
         }
     },
-    methods: {},
 }
