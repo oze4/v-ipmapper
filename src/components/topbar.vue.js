@@ -1,6 +1,6 @@
-let componentVTopbarPart = {     
+let topbar = {     
     template: `
-    <div class="m-b-90">
+    <div>
       <v-toolbar dark color="primary" fixed app> 
         <v-spacer></v-spacer>
             <a href="https://github.com/oze4" rel="noopener noreferrer" target="_blank" style="margin-top:5px;">
