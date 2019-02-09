@@ -1,36 +1,26 @@
 let select_provider = {
     template: `
-    <v-form row>
-        <v-container>
-            <v-layout>
-                <v-flex lg4 justify-center>
-                    <v-select 
-                        label="Select API Provider"
-                        @change="providerChanged" 
-                        :items="api_providers" 
-                        item-text="label"
-                        :clearable=true
-                    >
-                        <template slot="selection" slot-scope="data">
-                            {{ data.item.label }}
-                            <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
-                            </span>
-                        </template>
-                        <template slot="item" slot-scope="data">
-                            {{ data.item.label }}
-                            <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
-                            </span>
-                        </template>
-                    </v-select>
-                </v-flex>
-                <v-flex lg4>
-                    <v-text-field>
-
-                    </v-text-field>
-                </v-flex>
-            </v-layout>
-        </v-container>
-    </v-form>
+    <v-flex xs12 md10>
+        <v-card theme--light>
+            <v-container>
+                <v-select label="Select API Provider" @change="providerChanged" :items="api_providers"
+                    item-text="label" :clearable=true>
+                    <template slot="selection" slot-scope="data">
+                        {{ data.item.label }}
+                        <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
+                        </span>
+                    </template>
+                    <template slot="item" slot-scope="data">
+                        {{ data.item.label }}
+                        <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
+                        </span>
+                    </template>
+                </v-select>
+                <v-text-field>
+                </v-text-field>
+            </v-container>
+        </v-card>
+    </v-flex>
     `,
     props: {
         title: {

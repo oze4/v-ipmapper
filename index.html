@@ -20,7 +20,11 @@
         <v-app>
             <v-content>
                 <v-topbar></v-topbar>
-                <v-select-provider @provider-changed="logProvider" :api_providers="providers"></v-select-provider>
+                <v-container fill-height>
+                    <v-layout justify-space-around wrap>
+                        <v-select-provider @provider-changed="logProvider" :api_providers="providers"></v-select-provider>
+                    </v-layout>
+                </v-container>
             </v-content>
         </v-app>
     </div>
