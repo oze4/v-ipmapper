@@ -32,7 +32,6 @@ new Vue({
                 this.isKeyFieldShown = selected.isKeyRequired;
             } else {
                 this.selectedProvider = '';
-                // test
                 this.isHostIpFieldShown = this.isKeyFieldShown = false;
             }
         },
