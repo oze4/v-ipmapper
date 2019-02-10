@@ -3,8 +3,14 @@ let select_provider = {
     <v-flex xs12 md10>
         <v-card theme--light>
             <v-container>
-                <v-select label="Select API Provider" @change="providerChanged" :items="api_providers"
-                    item-text="label" :clearable=true>
+                <v-select 
+                    label="Select API Provider" 
+                    @change="providerChanged" 
+                    :items="api_providers"
+                    item-text="label" 
+                    clearable 
+                    return-object
+                >
                     <template slot="selection" slot-scope="data">
                         {{ data.item.label }}
                         <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
