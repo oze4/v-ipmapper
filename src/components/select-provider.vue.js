@@ -49,14 +49,6 @@ let select_provider = {
     </v-flex>
     `,
     props: {
-        title: {
-            type: String,
-            default: "Select API Provider",
-        },
-        subtitle: {
-            type: String,
-            default: " means API key is required",
-        },
         apiProviders: {
             type: Array,
             default: {},
