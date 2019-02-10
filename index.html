@@ -25,8 +25,8 @@
                         <v-select-provider
                             @provider-changed="selectedProviderChanged" 
                             :api-providers="providers"
-                            :is-key-field-shown="isKeyFieldShown"
-                            :is-host-ip-field-shown="isHostIpFieldShown"
+                            :show-api-key-field="showApiKeyField"
+                            :show-host-ip-field="showHostIpField"
                         ></v-select-provider>
                     </v-layout>
                 </v-container>

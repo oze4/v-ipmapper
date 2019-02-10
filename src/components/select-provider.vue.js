@@ -26,7 +26,7 @@ let select_provider = {
                                 </template>
                             </v-select>
                         </v-flex>
-                        <v-flex v-if="isKeyFieldShown" xs12 md4>
+                        <v-flex v-if="showApiKeyField" xs12 md4>
                             <v-text-field 
                                 label="API Key"
                                 clearable
@@ -34,7 +34,7 @@ let select_provider = {
                                 :rules="rules.requiredField"
                             ></v-text-field>
                         </v-flex>
-                        <v-flex v-if="isHostIpFieldShown" xs12 md4>
+                        <v-flex v-if="showHostIpField" xs12 md4>
                             <v-text-field 
                                 label="Hostname or IP"
                                 clearable
@@ -53,11 +53,11 @@ let select_provider = {
             type: Array,
             default: {},
         },
-        isKeyFieldShown: {
+        showApiKeyField: {
             type: Boolean,
             default: false,
         },
-        isHostIpFieldShown: {
+        showHostIpField: {
             type: Boolean,
             default: false,
         },

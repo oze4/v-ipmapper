@@ -15,8 +15,8 @@ new Vue({
             },
         ],
         selectedProvider: '',
-        isKeyFieldShown: false,
-        isHostIpFieldShown: false,
+        showApiKeyField: false,
+        showHostIpField: false,
     },
     computed: {
 
@@ -28,11 +28,11 @@ new Vue({
         selectedProviderChanged (selected) {
             if (selected !== '' && selected !== undefined) {
                 this.selectedProvider = selected.provider;
-                this.isHostIpFieldShown = true;
-                this.isKeyFieldShown = selected.isKeyRequired;
+                this.showHostIpField = true;
+                this.showApiKeyField = selected.isKeyRequired;
             } else {
                 this.selectedProvider = '';
-                this.isHostIpFieldShown = this.isKeyFieldShown = false;
+                this.showHostIpField = this.showApiKeyField = false;
             }
         },
     },
