@@ -27,9 +27,11 @@ new Vue({
     methods: {
         selectedProviderChanged (val) {
             if (val !== '' && val !== undefined) {
+                this.selectedProvider = val.label;
                 this.isHostIpFieldShown = true;
                 this.isKeyFieldShown = val.keyRequired;
             } else {
+                this.selectedProvider = '';
                 this.isHostIpFieldShown = this.isKeyFieldShown = false;
             }
         },
