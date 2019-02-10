@@ -1,7 +1,7 @@
 let select_provider = {
     template: `
     <v-flex xs12 md10>
-        <v-card>
+        <v-card class="elevation-10">
             <v-form>
                 <v-container>
                     <v-layout justify-center wrap>
@@ -13,6 +13,8 @@ let select_provider = {
                                 item-text="label" 
                                 clearable 
                                 return-object
+                                persistent-hint
+                                hint="<small class='mdi mdi-key red--text'></small> means API key is required"
                             >
                                 <template slot="selection" slot-scope="data">
                                     {{ data.item.label }}
