@@ -10,21 +10,19 @@ let select_provider = {
                                 label="Select API Provider" 
                                 @change="providerChanged" 
                                 :items="apiProviders"
-                                item-text="label" 
+                                item-text="provider" 
                                 clearable 
                                 return-object
                                 persistent-hint
-                                hint="<small class='mdi mdi-key red--text'></small> means API key is required"
+                                hint="<small><i class='mdi mdi-key red--text'></i> means API key is required</small>"
                             >
                                 <template slot="selection" slot-scope="data">
-                                    {{ data.item.label }}
-                                    <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
-                                    </span>
+                                    {{ data.item.provider }}
+                                    <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
                                 </template>
                                 <template slot="item" slot-scope="data">
-                                    {{ data.item.label }}
-                                    <span v-if="data.item.keyRequired" class="mdi mdi-key red--text">
-                                    </span>
+                                    {{ data.item.provider }}
+                                    <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
                                 </template>
                             </v-select>
                         </v-flex>
@@ -32,12 +30,16 @@ let select_provider = {
                             <v-text-field 
                                 label="API Key"
                                 clearable
+                                required
+                                :rules="rules.requiredField"
                             ></v-text-field>
                         </v-flex>
                         <v-flex v-if="isHostIpFieldShown" xs12 md4>
                             <v-text-field 
                                 label="Hostname or IP"
                                 clearable
+                                required
+                                :rules="rules.requiredField"
                             ></v-text-field>
                         </v-flex>
                     </v-layout>
@@ -69,7 +71,13 @@ let select_provider = {
         },
     },
     data: function () {
-        return {}
+        return {
+            rules: {
+                requiredField: [
+                    (text) => !!text || "This field is required!",
+                ],
+            },
+        }
     },
     computed: {},
     methods: {

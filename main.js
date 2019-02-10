@@ -6,12 +6,12 @@ new Vue({
     },
     data: {
         providers: [{
-                label: "http://ip-api.com",
-                keyRequired: false,
+                provider: "http://ip-api.com",
+                isKeyRequired: false,
             },
             {
-                label: "http://ipstack.com",
-                keyRequired: true,
+                provider: "http://ipstack.com",
+                isKeyRequired: true,
             },
         ],
         selectedProvider: '',
@@ -25,11 +25,11 @@ new Vue({
 
     },
     methods: {
-        selectedProviderChanged (val) {
-            if (val !== '' && val !== undefined) {
-                this.selectedProvider = val.label;
+        selectedProviderChanged (selected) {
+            if (selected !== '' && selected !== undefined) {
+                this.selectedProvider = selected.provider;
                 this.isHostIpFieldShown = true;
-                this.isKeyFieldShown = val.keyRequired;
+                this.isKeyFieldShown = selected.isKeyRequired;
             } else {
                 this.selectedProvider = '';
                 // test
