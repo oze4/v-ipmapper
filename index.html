@@ -19,12 +19,15 @@
     <div id="root" v-cloak>
         <v-app>
             <v-content>
-                <v-topbar></v-topbar>
+                <v-topbar
+                ></v-topbar>
                 <v-container fill-height>
-                    <v-layout justify-space-around wrap>
+                    <v-layout justify-center wrap>
                         <v-select-provider 
-                            @provider-changed="logProvider" 
-                            :api_providers="providers"
+                            @provider-changed="selectedProviderChanged" 
+                            :api-providers="providers"
+                            :is-key-field-shown="isKeyFieldShown"
+                            :is-host-ip-field-shown="isHostIpFieldShown"
                         ></v-select-provider>
                     </v-layout>
                 </v-container>

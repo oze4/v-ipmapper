@@ -14,12 +14,24 @@ new Vue({
                 keyRequired: true,
             },
         ],
+        selectedProvider: '',
+        isKeyFieldShown: false,
+        isHostIpFieldShown: false,
     },
-    computed: {},
-    watch: {},
+    computed: {
+
+    },
+    watch: {
+
+    },
     methods: {
-        logProvider: function (val) {
-            console.log(val);
+        selectedProviderChanged (val) {
+            if (val !== '' && val !== undefined) {
+                this.isHostIpFieldShown = true;
+                this.isKeyFieldShown = val.keyRequired;
+            } else {
+                this.isHostIpFieldShown = this.isKeyFieldShown = false;
+            }
         },
     },
 });
