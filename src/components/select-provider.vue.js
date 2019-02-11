@@ -10,7 +10,8 @@ let select_provider = {
                                 v-model="selectedItem"
                                 label="Select API Provider"
                                 @change="providerChanged"
-                                @focusout="focusedOut"
+                                @focusout="checkValidation"
+                                @click:clear="checkValidation"
                                 :items="apiProviders"
                                 item-text="provider" 
                                 clearable 
@@ -88,7 +89,7 @@ let select_provider = {
     computed: {},
     watch: {},
     methods: {
-        focusedOut() {
+        checkValidation() {
             let s = this.selectedItem;
             function cve(f) {
                 f.$refs.form.resetValidation();
