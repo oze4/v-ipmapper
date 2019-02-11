@@ -7,8 +7,10 @@ let select_provider = {
                     <v-layout justify-center wrap>
                         <v-flex xs12 md4>
                             <v-select
+                                v-model="selectedItem"
                                 label="Select API Provider"
                                 @change="providerChanged"
+                                @focusout="focusedOut"
                                 :items="apiProviders"
                                 item-text="provider" 
                                 clearable 
@@ -75,6 +77,7 @@ let select_provider = {
     data: function () {
         return {
             valid: false,
+            selectedItem: '',
             rules: {
                 requiredField: [
                     (v) => !!v || "This field is required!",
@@ -85,6 +88,15 @@ let select_provider = {
     computed: {},
     watch: {},
     methods: {
+        focusedOut() {
+            let s = this.selectedItem;
+            function cve(f) {
+                f.$refs.form.resetValidation();
+            };
+            if (s === '' || s === undefined || s === null) {
+                setTimeout(cve, 3000, this);
+            }
+        },
         providerChanged(val) {
             this.$emit('provider-changed', val);
         },
