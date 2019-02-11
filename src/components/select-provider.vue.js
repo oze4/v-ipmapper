@@ -2,19 +2,21 @@ let select_provider = {
     template: `
     <v-flex xs12 md10>
         <v-card class="elevation-10">
-            <v-form>
+            <v-form v-model="valid" ref="form">
                 <v-container>
                     <v-layout justify-center wrap>
                         <v-flex xs12 md4>
-                            <v-select 
-                                label="Select API Provider" 
-                                @change="providerChanged" 
+                            <v-select
+                                label="Select API Provider"
+                                @change="providerChanged"
                                 :items="apiProviders"
                                 item-text="provider" 
                                 clearable 
                                 return-object
                                 persistent-hint
                                 hint="<small><i class='mdi mdi-key red--text'></i> means API key is required</small>"
+                                required
+                                :rules="rules.requiredField"
                             >
                                 <template slot="selection" slot-scope="data">
                                     {{ data.item.provider }}
@@ -27,7 +29,7 @@ let select_provider = {
                             </v-select>
                         </v-flex>
                         <v-flex v-if="showApiKeyField" xs12 md4>
-                            <v-text-field 
+                            <v-text-field
                                 label="API Key"
                                 clearable
                                 required
@@ -35,7 +37,7 @@ let select_provider = {
                             ></v-text-field>
                         </v-flex>
                         <v-flex v-if="showHostIpField" xs12 md4>
-                            <v-text-field 
+                            <v-text-field
                                 label="Hostname or IP"
                                 clearable
                                 required
@@ -46,6 +48,14 @@ let select_provider = {
                 </v-container>
             </v-form>
         </v-card>
+        <v-container class="text-xs-center">
+            <v-btn 
+                @click="generateMap" 
+                v-ripple 
+                :class="{ red: !valid, green: valid }"
+                :disabled="!valid"
+            >Generate Map</v-btn>
+        </v-container>
     </v-flex>
     `,
     props: {
@@ -64,17 +74,24 @@ let select_provider = {
     },
     data: function () {
         return {
+            valid: false,
             rules: {
                 requiredField: [
-                    (text) => !!text || "This field is required!",
-                ],
+                    (v) => !!v || "This field is required!",
+                ]
             },
         }
     },
     computed: {},
+    watch: {},
     methods: {
         providerChanged(val) {
             this.$emit('provider-changed', val);
-        }
+        },
+        generateMap() {
+            /**
+             * TODO
+             */
+        },
     },
 }

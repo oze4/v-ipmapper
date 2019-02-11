@@ -25,7 +25,7 @@ new Vue({
 
     },
     methods: {
-        selectedProviderChanged (selected) {
+        selectedProviderChanged(selected) {
             if (selected !== '' && selected !== undefined) {
                 this.selectedProvider = selected.provider;
                 this.showHostIpField = true;
