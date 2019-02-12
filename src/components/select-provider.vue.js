@@ -10,8 +10,8 @@ let select_provider = {
                                 v-model="selectedItem"
                                 label="Select API Provider"
                                 @change="providerChanged"
-                                @focusout="checkValidation"
-                                @click:clear="checkValidation"
+                                @focusout="checkValidation(false)"
+                                @click:clear="checkValidation(true)"
                                 :items="apiProviders"
                                 item-text="provider" 
                                 clearable 
@@ -52,7 +52,7 @@ let select_provider = {
             </v-form>
         </v-card>
         <v-container class="text-xs-center">
-            <v-btn 
+            <v-btn
                 @click="generateMap" 
                 v-ripple 
                 :class="{ red: !valid, green: valid }"
@@ -89,14 +89,18 @@ let select_provider = {
     computed: {},
     watch: {},
     methods: {
-        checkValidation() {
-            let s = this.selectedItem;
-            function cve(f) {
-                f.$refs.form.resetValidation();
+        clearValidation(f) {
+            f.$refs.form.resetValidation();
+        },
+        checkValidation(cleared) {
+            if (cleared) {
+                this.selectedItem = '';
+                //this.$refs.vcard.click;
             };
+            let s = this.selectedItem;
             if (s === '' || s === undefined || s === null) {
-                setTimeout(cve, 3000, this);
-            }
+                setTimeout(this.clearValidation, 3000, this);
+            };
         },
         providerChanged(val) {
             this.$emit('provider-changed', val);
