@@ -2,7 +2,7 @@ let select_provider = {
     template: `
     <v-flex xs12 md10>
         <v-card class="elevation-10">
-            <v-form v-model="valid" ref="form">
+            <v-form v-model="valid" ref="form" :key="formUniqueKey">
                 <v-container>
                     <v-layout justify-center wrap>
                         <v-flex xs12 md4>
@@ -10,8 +10,8 @@ let select_provider = {
                                 v-model="selectedItem"
                                 label="Select API Provider"
                                 @change="providerChanged"
-                                @focusout="checkValidation(false)"
-                                @click:clear="checkValidation(true)"
+                                @focusout="ifValidationErrorClearAfter(2700)"
+                                @click:clear="resetFormUniqueKey"
                                 :items="apiProviders"
                                 item-text="provider" 
                                 clearable 
@@ -77,6 +77,7 @@ let select_provider = {
     },
     data: function () {
         return {
+            formUniqueKey: Date.now(),
             valid: false,
             selectedItem: '',
             rules: {
@@ -89,17 +90,31 @@ let select_provider = {
     computed: {},
     watch: {},
     methods: {
-        clearValidation(f) {
-            f.$refs.form.resetValidation();
+        resetFormUniqueKey() {
+            /**
+             * Had issues with resetting validation errors on click:clear.
+             * Had to reset the rendered components :key, which re-renders the
+             * form, thus all validation errors are cleared.
+             * 
+             * This had to be done using a promise so the DOM could render 
+             * before mutation.
+             */
+            this.$nextTick().then(() => {
+                this.formUniqueKey = Date.now();
+            })
         },
-        checkValidation(cleared) {
-            if (cleared) {
-                this.selectedItem = '';
-                //this.$refs.vcard.click;
-            };
+        clearValidation() {
+            this.$refs.form.resetValidation();
+        },
+        ifValidationErrorClearAfter(time) {
+            /**
+             * Checks if the selection is null/empty after focusout
+             * and resets form validation after 3 seconds so the error
+             * doesnt just sit there forever.
+             */
             let s = this.selectedItem;
             if (s === '' || s === undefined || s === null) {
-                setTimeout(this.clearValidation, 3000, this);
+                setTimeout(this.clearValidation, time);
             };
         },
         providerChanged(val) {
