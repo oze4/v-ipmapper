@@ -18,14 +18,20 @@
 
     <div id="root" v-cloak>
         <v-app>
-            <v-content>
-                <v-topbar></v-topbar>
+            <v-content 
+                :style="{ height: content.calculatedHeight + 'px' }"
+            >
+                <v-topbar 
+                    :toolbar-extension-height="toolbarExtension.height"
+                >
+                </v-topbar>
                     <v-select-provider
                         @provider-changed="selectedProviderChanged" 
                         :api-providers="providers"
                         :show-api-key-field="showApiKeyField"
                         :show-host-ip-field="showHostIpField"
-                    ></v-select-provider>
+                    >
+                    </v-select-provider>
             </v-content>
         </v-app>
     </div>

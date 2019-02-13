@@ -8,10 +8,22 @@ let topbar = {
             </a>
             <v-spacer></v-spacer>
         </v-toolbar>
-        <v-toolbar dark color="primary" extended flat style="height:300px;">
+        <v-toolbar dark color='primary' flat :height=toolbarHeight>
+            
         </v-toolbar>
     </div>
     `,
+    props: {
+        toolbarExtensionHeight: {
+            type: Number,
+            default: 64,
+        },
+    },
+    computed: {
+        toolbarHeight() {
+            return String(this.toolbarExtensionHeight);
+        }
+    },
     data() {
         return {
 

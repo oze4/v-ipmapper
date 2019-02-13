@@ -15,18 +15,36 @@ new Vue({
                 isKeyRequired: true,
             },
         ],
+        content: {
+            calculatedHeight: 0,
+        },
+        toolbarExtension: {
+            height: 300,
+        },
         selectedProvider: '',
         showApiKeyField: false,
         showHostIpField: false,
     },
     computed: {
-
+    },
+    created() {
+        window.addEventListener('resize', this.handleResize)
+        this.handleResize();
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.handleResize)
     },
     watch: {
 
     },
     methods: {
+        handleResize() {
+            this.content.calculatedHeight = window.innerHeight > this.toolbarExtension.height ?
+                window.innerHeight + this.toolbarExtension.height :
+                window.innerHeight;
+        },
         selectedProviderChanged(selected) {
+            console.log('invoked selectedProviderChanged');
             if (selected !== '' && selected !== undefined) {
                 this.selectedProvider = selected.provider;
                 this.showHostIpField = true;
