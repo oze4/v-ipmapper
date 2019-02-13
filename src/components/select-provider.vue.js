@@ -97,7 +97,7 @@ let select_provider = {
         resetFormUniqueKey() {
             /**
              * Had issues with resetting validation errors on click:clear.
-             * Had to reset the rendered components :key, which re-renders the
+             * Had to reset the rendered component :key, which re-renders the
              * form, thus all validation errors are cleared.
              * 
              * This had to be done using a promise so the DOM could render 
