@@ -1,2 +1,2 @@
 # [v-ipmapper](http://v-ipmapper.ostrike.com)
-Map Public IP Addresses using Vue.js
+Map public IP addresses using Vue.js
