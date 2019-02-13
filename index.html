@@ -18,9 +18,8 @@
 
     <div id="root" v-cloak>
         <v-app>
-            <v-content>
+            <v-content style="height:875px;">
                 <v-topbar></v-topbar>
-                <!--v-welcome-banner></v-welcome-banner-->
                     <v-select-provider
                         @provider-changed="selectedProviderChanged" 
                         :api-providers="providers"
