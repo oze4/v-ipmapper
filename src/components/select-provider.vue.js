@@ -113,7 +113,7 @@ let select_provider = {
         ifValidationErrorClearAfter(time) {
             /**
              * Checks if the selection is null/empty after focusout
-             * and resets form validation after 3 seconds so the error
+             * and resets form validation after 'time' seconds so the error
              * doesnt just sit there forever.
              */
             let s = this.selectedItem;
