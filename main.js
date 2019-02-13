@@ -1,9 +1,24 @@
 new Vue({
     el: '#root',
+    template: `
+    <v-app>
+        <v-content :style="{ height: content.calculatedHeight + 'px' }">
+            <v-topbar :extension-height="topbarExtension.height">
+            </v-topbar>
+                <v-select-provider
+                    @provider-changed="selectedProviderChanged" 
+                    :api-providers="providers"
+                    :show-api-key-field="field.apiKey.show"
+                    :show-host-ip-field="field.hostIp.show"
+                >
+                </v-select-provider>
+        </v-content>
+    </v-app>
+    `,
     components: {
         'v-topbar': topbar,
-        'v-welcome-banner': welcome_banner,
         'v-select-provider': select_provider,
+        //'v-welcome-banner': welcome_banner,
     },
     data: {
         providers: [{
@@ -15,17 +30,23 @@ new Vue({
                 isKeyRequired: true,
             },
         ],
+        provider: {
+            selected: '',
+        },
         content: {
             calculatedHeight: 0,
         },
-        toolbarExtension: {
+        topbarExtension: {
             height: 300,
         },
-        selectedProvider: '',
-        showApiKeyField: false,
-        showHostIpField: false,
-    },
-    computed: {
+        field: {
+            apiKey: {
+                show: false,
+            },
+            hostIp: {
+                show: false,
+            }
+        },
     },
     created() {
         window.addEventListener('resize', this.handleResize)
@@ -34,24 +55,20 @@ new Vue({
     destroyed() {
         window.removeEventListener('resize', this.handleResize)
     },
-    watch: {
-
-    },
     methods: {
         handleResize() {
-            this.content.calculatedHeight = window.innerHeight > this.toolbarExtension.height ?
-                window.innerHeight + this.toolbarExtension.height :
+            this.content.calculatedHeight = window.innerHeight > this.topbarExtension.height ?
+                window.innerHeight + this.topbarExtension.height :
                 window.innerHeight;
         },
         selectedProviderChanged(selected) {
-            console.log('invoked selectedProviderChanged');
             if (selected !== '' && selected !== undefined) {
-                this.selectedProvider = selected.provider;
-                this.showHostIpField = true;
-                this.showApiKeyField = selected.isKeyRequired;
+                this.provider.selected = selected.provider;
+                this.field.apiKey.show = selected.isKeyRequired;
+                this.field.hostIp.show = true;
             } else {
-                this.selectedProvider = '';
-                this.showHostIpField = this.showApiKeyField = false;
+                this.provider.selected = '';
+                this.field.hostIp.show = this.field.apiKey.show = false;
             }
         },
     },

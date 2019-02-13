@@ -17,23 +17,7 @@
 <body>
 
     <div id="root" v-cloak>
-        <v-app>
-            <v-content 
-                :style="{ height: content.calculatedHeight + 'px' }"
-            >
-                <v-topbar 
-                    :toolbar-extension-height="toolbarExtension.height"
-                >
-                </v-topbar>
-                    <v-select-provider
-                        @provider-changed="selectedProviderChanged" 
-                        :api-providers="providers"
-                        :show-api-key-field="showApiKeyField"
-                        :show-host-ip-field="showHostIpField"
-                    >
-                    </v-select-provider>
-            </v-content>
-        </v-app>
+        <!-- html will be auto-injected -->
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

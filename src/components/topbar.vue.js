@@ -1,33 +1,35 @@
 let topbar = {     
     template: `
     <div>
-        <v-toolbar dark color="primary" fixed flat app> 
+        <v-toolbar color='primary' dark fixed flat app> 
             <v-spacer></v-spacer>
-            <a href="https://github.com/oze4" rel="noopener noreferrer" target="_blank" style="margin-top:5px;">
-                <img style="width: 56px; height: 52px;" alt="homepage" src="./docs/img/ostrike_logo.png">
+            <a :href='logo.url' :rel='logo.rel' target='_blank' style='margin-top:5px;'>
+                <img :src='logo.image' :alt='logo.alt' :style='logo.style'>
             </a>
             <v-spacer></v-spacer>
         </v-toolbar>
-        <v-toolbar dark color='primary' flat :height=toolbarHeight>
+        <v-toolbar color='primary' dark flat :height='extensionHeight'>
             
         </v-toolbar>
     </div>
     `,
     props: {
-        toolbarExtensionHeight: {
+        extensionHeight: {
             type: Number,
             default: 64,
         },
     },
-    computed: {
-        toolbarHeight() {
-            return String(this.toolbarExtensionHeight);
-        }
-    },
-    data() {
+    computed: {},
+    data() { 
         return {
-
-        };
+            logo: {
+                url: 'https://github.com/oze4',
+                image: './docs/img/ostrike_logo.png',
+                rel: 'noopener noreferrer',
+                alt: 'matt_oestreich_github',
+                style: 'width:56px; height:52px;',
+            },
+        }; 
     },
     methods: {}
 }
