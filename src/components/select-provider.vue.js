@@ -1,6 +1,6 @@
 let select_provider = {
     template: `
-    <v-container>
+    <v-container style="height:525px;">
         <v-layout justify-center wrap>
             <v-flex xs12 md10>
                 <v-card class="elevation-10">
