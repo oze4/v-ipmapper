@@ -1,65 +1,69 @@
 let select_provider = {
     template: `
-    <v-flex xs12 md10>
-        <v-card class="elevation-10">
-            <v-form v-model="valid" ref="form" :key="formUniqueKey">
-                <v-container>
-                    <v-layout justify-center wrap>
-                        <v-flex xs12 md4>
-                            <v-select
-                                v-model="selectedItem"
-                                label="Select API Provider"
-                                @change="providerChanged"
-                                @focusout="ifValidationErrorClearAfter(3000)"
-                                @click:clear="resetFormUniqueKey"
-                                :items="apiProviders"
-                                item-text="provider" 
-                                clearable 
-                                return-object
-                                persistent-hint
-                                hint="<small><i class='mdi mdi-key red--text'></i> means API key is required</small>"
-                                required
-                                :rules="rules.requiredField"
-                            >
-                                <template slot="selection" slot-scope="data">
-                                    {{ data.item.provider }}
-                                    <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
-                                </template>
-                                <template slot="item" slot-scope="data">
-                                    {{ data.item.provider }}
-                                    <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
-                                </template>
-                            </v-select>
-                        </v-flex>
-                        <v-flex v-if="showApiKeyField" xs12 md4>
-                            <v-text-field
-                                label="API Key"
-                                clearable
-                                required
-                                :rules="rules.requiredField"
-                            ></v-text-field>
-                        </v-flex>
-                        <v-flex v-if="showHostIpField" xs12 md4>
-                            <v-text-field
-                                label="Hostname or IP"
-                                clearable
-                                required
-                                :rules="rules.requiredField"
-                            ></v-text-field>
-                        </v-flex>
-                    </v-layout>
+    <v-container>
+        <v-layout justify-center wrap>
+            <v-flex xs12 md10>
+                <v-card class="elevation-10">
+                    <v-form v-model="valid" ref="form" :key="formUniqueKey">
+                        <v-container>
+                            <v-layout justify-center wrap>
+                                <v-flex xs12 md4>
+                                    <v-select
+                                        v-model="selectedItem"
+                                        label="Select API Provider"
+                                        @change="providerChanged"
+                                        @focusout="ifValidationErrorClearAfter(3000)"
+                                        @click:clear="resetFormUniqueKey"
+                                        :items="apiProviders"
+                                        item-text="provider" 
+                                        clearable 
+                                        return-object
+                                        persistent-hint
+                                        hint="<small><i class='mdi mdi-key red--text'></i> means API key is required</small>"
+                                        required
+                                        :rules="rules.requiredField"
+                                    >
+                                        <template slot="selection" slot-scope="data">
+                                            {{ data.item.provider }}
+                                            <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
+                                        </template>
+                                        <template slot="item" slot-scope="data">
+                                            {{ data.item.provider }}
+                                            <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
+                                        </template>
+                                    </v-select>
+                                </v-flex>
+                                <v-flex v-if="showApiKeyField" xs12 md4>
+                                    <v-text-field
+                                        label="API Key"
+                                        clearable
+                                        required
+                                        :rules="rules.requiredField"
+                                    ></v-text-field>
+                                </v-flex>
+                                <v-flex v-if="showHostIpField" xs12 md4>
+                                    <v-text-field
+                                        label="Hostname or IP"
+                                        clearable
+                                        required
+                                        :rules="rules.requiredField"
+                                    ></v-text-field>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-form>
+                </v-card>
+                <v-container class="text-xs-center">
+                    <v-btn
+                        @click="generateMap" 
+                        v-ripple 
+                        color="green"
+                        :disabled="!valid"
+                    >Generate Map</v-btn>
                 </v-container>
-            </v-form>
-        </v-card>
-        <v-container class="text-xs-center">
-            <v-btn
-                @click="generateMap" 
-                v-ripple 
-                :class="{ red: !valid, green: valid }"
-                :disabled="!valid"
-            >Generate Map</v-btn>
-        </v-container>
-    </v-flex>
+            </v-flex>
+        </v-layout>
+    </v-container>
     `,
     props: {
         apiProviders: {
@@ -75,7 +79,7 @@ let select_provider = {
             default: false,
         },
     },
-    data: function () {
+    data() {
         return {
             formUniqueKey: Date.now(),
             valid: false,

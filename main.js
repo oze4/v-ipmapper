@@ -2,6 +2,7 @@ new Vue({
     el: '#root',
     components: {
         'v-topbar': topbar,
+        'v-welcome-banner': welcome_banner,
         'v-select-provider': select_provider,
     },
     data: {

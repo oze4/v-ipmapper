@@ -20,16 +20,13 @@
         <v-app>
             <v-content>
                 <v-topbar></v-topbar>
-                <v-container>
-                    <v-layout justify-center wrap>
-                        <v-select-provider
-                            @provider-changed="selectedProviderChanged" 
-                            :api-providers="providers"
-                            :show-api-key-field="showApiKeyField"
-                            :show-host-ip-field="showHostIpField"
-                        ></v-select-provider>
-                    </v-layout>
-                </v-container>
+                <!--v-welcome-banner></v-welcome-banner-->
+                    <v-select-provider
+                        @provider-changed="selectedProviderChanged" 
+                        :api-providers="providers"
+                        :show-api-key-field="showApiKeyField"
+                        :show-host-ip-field="showHostIpField"
+                    ></v-select-provider>
             </v-content>
         </v-app>
     </div>
@@ -39,6 +36,7 @@
     <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
 
     <script src="./src/components/topbar.vue.js"></script>
+    <script src="./src/components/welcome-banner.vue.js"></script>
     <script src="./src/components/select-provider.vue.js"></script>
     <script src="./main.js"></script>
 
