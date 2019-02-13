@@ -22,11 +22,11 @@ new Vue({
     },
     data: {
         providers: [{
-                provider: "http://ip-api.com",
+                name: "http://ip-api.com",
                 isKeyRequired: false,
             },
             {
-                provider: "http://ipstack.com",
+                name: "http://ipstack.com",
                 isKeyRequired: true,
             },
         ],
@@ -61,10 +61,10 @@ new Vue({
                 window.innerHeight + this.topbarExtension.height :
                 window.innerHeight;
         },
-        selectedProviderChanged(selected) {
-            if (selected !== '' && selected !== undefined) {
-                this.provider.selected = selected.provider;
-                this.field.apiKey.show = selected.isKeyRequired;
+        selectedProviderChanged(selectedProvider) {
+            if (selectedProvider !== '' && selectedProvider !== undefined) {
+                this.provider.selected = selectedProvider.name;
+                this.field.apiKey.show = selectedProvider.isKeyRequired;
                 this.field.hostIp.show = true;
             } else {
                 this.provider.selected = '';

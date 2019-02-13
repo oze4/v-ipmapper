@@ -15,7 +15,7 @@ let select_provider = {
                                         @focusout="ifValidationErrorClearAfter(3000)"
                                         @click:clear="resetFormUniqueKey"
                                         :items="apiProviders"
-                                        item-text="provider" 
+                                        item-text="name" 
                                         clearable 
                                         return-object
                                         persistent-hint
@@ -24,11 +24,11 @@ let select_provider = {
                                         :rules="rules.requiredField"
                                     >
                                         <template slot="selection" slot-scope="data">
-                                            {{ data.item.provider }}
+                                            {{ data.item.name }}
                                             <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
                                         </template>
                                         <template slot="item" slot-scope="data">
-                                            {{ data.item.provider }}
+                                            {{ data.item.name }}
                                             <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
                                         </template>
                                     </v-select>
