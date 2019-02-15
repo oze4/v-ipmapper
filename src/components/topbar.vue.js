@@ -53,8 +53,8 @@ let topbar = {
              * Sets CSS Style
              * 
              * Had to programmatically add style to the welcome message because
-             * I was unable to figure out how to set the style on 'v-toolbar__content'
-             * which is dynamically created by Vuetify.
+             * I was unable to figure out how to set the style on 'v-toolbar__content',
+             * which is dynamically created by Vuetify and v-toolbar.
              */
             let e = this.$refs.welcome_message.$el.children[0];
             e.style.justifyContent = e.className === 'v-toolbar__content' ? 'center' : '';
