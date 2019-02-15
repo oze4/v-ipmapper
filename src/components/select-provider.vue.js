@@ -36,18 +36,24 @@ let select_provider = {
                                 <v-flex v-if="showApiKeyField" xs12 md4>
                                     <v-text-field
                                         label="API Key"
+                                        hide-details
                                         clearable
                                         required
                                         :rules="rules.requiredField"
                                     ></v-text-field>
                                 </v-flex>
                                 <v-flex v-if="showHostIpField" xs12 md4>
-                                    <v-text-field
+                                    <v-text-field                                        
                                         label="Hostname or IP"
+                                        hide-details
                                         clearable
                                         required
                                         :rules="rules.requiredField"
                                     ></v-text-field>
+                                    <v-switch 
+                                        :height='4'
+                                        label='Use Current IP'
+                                    ></v-switch>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -110,7 +116,10 @@ let select_provider = {
             })
         },
         clearValidation() {
-            this.$refs.form.resetValidation();
+            let s = this.form.selected;
+            if (s === '' || s === undefined || s === null) {
+                this.$refs.form.resetValidation();
+            }
         },
         ifValidationErrorClearAfter(time) {
             /**
