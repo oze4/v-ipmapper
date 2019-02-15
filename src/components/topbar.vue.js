@@ -10,14 +10,14 @@ let topbar = {
         </v-toolbar>
         <v-toolbar color='primary' dark flat :height='extensionHeight' ref='welcome_message'>
             <v-container fill-height>
-                <v-layout text-xs-center>
-                    <v-flex>
+                <v-layout text-xs-center row>
+                    <v-flex >
                         <span style='margin-right:30%;'>{{ message.header }}</span>
                         <v-flex class='display-3 font-weight-light font-italic'>{{ message.subHeader }}</v-flex>
                         <span class='caption' style='margin-left:30%;'>{{ message.author }}</span>
                     </v-flex>
                 </v-layout>
-            </v-container>     
+            </v-container>       
         </v-toolbar>
     </div>
     `,
