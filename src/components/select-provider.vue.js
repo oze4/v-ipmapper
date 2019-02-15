@@ -4,12 +4,12 @@ let select_provider = {
         <v-layout justify-center wrap>
             <v-flex xs12 md10>
                 <v-card class="elevation-10">
-                    <v-form v-model="valid" ref="form" :key="formUniqueKey">
+                    <v-form v-model="valid" ref="form" :key="form.key">
                         <v-container>
                             <v-layout justify-center wrap>
                                 <v-flex xs12 md4>
                                     <v-select
-                                        v-model="selectedItem"
+                                        v-model="form.selected"
                                         label="Select API Provider"
                                         @change="providerChanged"
                                         @focusout="ifValidationErrorClearAfter(3000)"
@@ -58,7 +58,7 @@ let select_provider = {
                         @click="generateMap" 
                         v-ripple 
                         color="green"
-                        :disabled="!valid"
+                        :disabled="!form.valid"
                     >Generate Map</v-btn>
                 </v-container>
             </v-flex>
@@ -81,9 +81,11 @@ let select_provider = {
     },
     data() {
         return {
-            formUniqueKey: Date.now(),
-            valid: false,
-            selectedItem: '',
+            form: {
+                key: Date.now(),
+                valid: false,
+                selected: '',
+            },
             rules: {
                 requiredField: [
                     (v) => !!v || "This field is required!",
@@ -104,7 +106,7 @@ let select_provider = {
              * before mutation.
              */
             this.$nextTick().then(() => {
-                this.formUniqueKey = Date.now();
+                this.form.key = Date.now();
             })
         },
         clearValidation() {
@@ -116,7 +118,7 @@ let select_provider = {
              * and resets form validation after 'time' seconds so the error
              * doesnt just sit there forever.
              */
-            let s = this.selectedItem;
+            let s = this.form.selected;
             if (s === '' || s === undefined || s === null) {
                 setTimeout(this.clearValidation, time);
             };

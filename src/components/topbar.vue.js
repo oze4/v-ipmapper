@@ -8,13 +8,16 @@ let topbar = {
             </a>
             <v-spacer></v-spacer>
         </v-toolbar>
-        <v-toolbar color='primary' dark flat :height='extensionHeight'>
+        <v-toolbar color='primary' dark flat :height='extensionHeight' ref='welcome_message'>
+            <v-container fill-height>
                 <v-layout text-xs-center>
                     <v-flex>
-                        <span>{{ message.header }}</span>
-                        <h2>{{ message.subHeader }}</h2>
+                        <span style='margin-right:50%;'>{{ message.header }}</span>
+                        <v-flex class='display-3 font-weight-light font-italic'>{{ message.subHeader }}</v-flex>
+                        <span class='caption' style='margin-left:50%;'>{{ message.author }}</span>
                     </v-flex>
                 </v-layout>
+            </v-container>     
         </v-toolbar>
     </div>
     `,
@@ -24,12 +27,16 @@ let topbar = {
             default: 64,
         },
     },
+    mounted() {
+        this.centerWelcomeMessage();
+    },
     computed: {},
     data() { 
         return {
             message: {
                 header: "Welcome to v-ipmapper!",
-                subHeader: "Map Public IP Addresses"
+                subHeader: "MAP PUBLIC IP ADDRESSES",
+                author: "Made by Matthew Oestreich"
             },
             logo: {
                 url: 'https://github.com/oze4',
@@ -40,5 +47,17 @@ let topbar = {
             },
         }; 
     },
-    methods: {}
+    methods: {
+        centerWelcomeMessage() {
+            /**
+             * Sets CSS Style
+             * 
+             * Had to programmatically add style to the welcome message because
+             * I was unable to figure out how to set the style on 'v-toolbar__content'
+             * which is dynamically created by Vuetify.
+             */
+            let e = this.$refs.welcome_message.$el.children[0];
+            e.style.justifyContent = e.className === 'v-toolbar__content' ? 'center' : '';
+        },
+    }
 }
