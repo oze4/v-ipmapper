@@ -4,7 +4,7 @@ let select_provider = {
         <v-layout justify-center wrap>
             <v-flex xs12 md10>
                 <v-card class="elevation-10">
-                    <v-form v-model="valid" ref="form" :key="form.key">
+                    <v-form v-model="form.valid" ref="form" :key="form.key">
                         <v-container>
                             <v-layout justify-center wrap>
                                 <v-flex xs12 md4>
