@@ -28,7 +28,7 @@ let topbar = {
         },
     },
     mounted() {
-        this.centerWelcomeMessage();
+        this.centerWelcomeMessage;
     },
     computed: {},
     data() { 
@@ -47,7 +47,7 @@ let topbar = {
             },
         }; 
     },
-    methods: {
+    computed: {
         centerWelcomeMessage() {
             /**
              * Sets CSS Style
@@ -59,5 +59,8 @@ let topbar = {
             let e = this.$refs.welcome_message.$el.children[0];
             e.style.justifyContent = e.className === 'v-toolbar__content' ? 'center' : '';
         },
+    },
+    methods: {
+
     }
-}
+};

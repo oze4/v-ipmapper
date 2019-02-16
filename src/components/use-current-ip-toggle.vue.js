@@ -41,4 +41,4 @@ let use_current_ip_toggle = {
     },
     methods: {
     }
-}
+};
