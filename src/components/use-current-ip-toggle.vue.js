@@ -27,16 +27,18 @@ let use_current_ip_toggle = {
             state: false,
         }
     },
-    mounted() {
-        this.setToggleLabelTextSize();
-    },
-    methods: {
-        handleToggled() {
-            this.$emit('switch-toggled', this.state.toString());
-        },
+    computed: {
         setToggleLabelTextSize() {
             this.$refs.toggler.$el.querySelector('label')
                 .style.fontSize = this.labelFontSize + 'px';
         },
+        handleToggled() {
+            this.$emit('switch-toggled', this.state.toString());
+        },
+    },
+    mounted() {
+        this.setToggleLabelTextSize;
+    },
+    methods: {
     }
 }
