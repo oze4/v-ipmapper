@@ -3,21 +3,21 @@ new Vue({
     template: `
     <v-app>
         <v-content :style="{ height: content.calculatedHeight + 'px' }">
-            <v-topbar :extension-height="topbarExtension.height">
-            </v-topbar>
-                <v-select-provider
+            <ipm-topbar :extension-height="topbarExtension.height">
+            </ipm-topbar>
+                <ipm-select-provider
                     @provider-changed="selectedProviderChanged" 
                     :api-providers="providers"
                     :show-api-key-field="field.apiKey.show"
                     :show-host-ip-field="field.hostIp.show"
                 >
-                </v-select-provider>
+                </ipm-select-provider>
         </v-content>
     </v-app>
     `,
     components: {
-        'v-topbar': topbar,
-        'v-select-provider': select_provider,
+        'ipm-topbar': topbar,
+        'ipm-select-provider': select_provider,
         //'v-welcome-banner': welcome_banner,
     },
     data: {

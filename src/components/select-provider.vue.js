@@ -50,10 +50,10 @@ let select_provider = {
                                         required
                                         :rules="rules.requiredField"
                                     ></v-text-field>
-                                    <v-switch 
-                                        :height='4'
+                                    <ipm-use-current-ip-toggle
                                         label='Use Current IP'
-                                    ></v-switch>
+                                        height='4'
+                                    ></ipm-use-current-ip-toggle>
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -85,9 +85,15 @@ let select_provider = {
             default: false,
         },
     },
+    components: {
+        'ipm-use-current-ip-toggle': use_current_ip_toggle,
+    },
     data() {
         return {
             form: {
+                label: {
+                    useCurrentIp: 'Use Current IP'
+                },
                 key: Date.now(),
                 valid: false,
                 selected: '',
