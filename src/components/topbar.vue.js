@@ -12,9 +12,15 @@ let topbar = {
             <v-container fill-height>
                 <v-layout text-xs-center row>
                     <v-flex >
-                        <span style='margin-right:30%;'>{{ message.header }}</span>
-                        <v-flex class='display-3 font-weight-light font-italic'>{{ message.subHeader }}</v-flex>
-                        <span class='caption' style='margin-left:30%;'>{{ message.author }}</span>
+                        <span style='margin-right:30%;'>
+                            {{ message.header }}
+                        </span>
+                        <v-flex class='display-3 font-weight-light font-italic'>
+                            {{ message.subHeader }}
+                        </v-flex>
+                        <span class='caption' style='margin-left:30%;'>
+                            {{ message.author }}
+                        </span>
                     </v-flex>
                 </v-layout>
             </v-container>       
