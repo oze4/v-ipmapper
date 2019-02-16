@@ -13,7 +13,7 @@ let select_provider = {
                                         label="Select API Provider"
                                         @change="providerChanged"
                                         @focusout="ifValidationErrorClearAfter(3000)"
-                                        @click:clear="resetFormUniqueKey"
+                                        @click:clear="clearSelection"
                                         :items="apiProviders"
                                         item-text="name" 
                                         clearable 
@@ -49,10 +49,14 @@ let select_provider = {
                                         clearable
                                         required
                                         :rules="rules.requiredField"
+                                        :disabled='useCurrentIp'
+                                        ref='host_ip_field'
                                     ></v-text-field>
                                     <ipm-use-current-ip-toggle
-                                        label='Use Current IP'
-                                        height='4'
+                                        :label='toggle.label'
+                                        :labelFontSize='toggle.fontSize'
+                                        :height='toggle.height'
+                                        @switch-toggled='handleToggle'
                                     ></ipm-use-current-ip-toggle>
                                 </v-flex>
                             </v-layout>
@@ -90,10 +94,12 @@ let select_provider = {
     },
     data() {
         return {
+            toggle: {
+                label: 'Use Current IP',
+                height: 4,
+                fontSize: 11,
+            },
             form: {
-                label: {
-                    useCurrentIp: 'Use Current IP'
-                },
                 key: Date.now(),
                 valid: false,
                 selected: '',
@@ -103,11 +109,14 @@ let select_provider = {
                     (v) => !!v || "This field is required!",
                 ]
             },
+            useCurrentIp: false,
         }
     },
-    computed: {},
-    watch: {},
     methods: {
+        clearSelection() {
+            this.resetFormUniqueKey();
+            this.useCurrentIp = false;
+        },
         resetFormUniqueKey() {
             /**
              * Had issues with resetting validation errors on click:clear.
@@ -121,7 +130,7 @@ let select_provider = {
                 this.form.key = Date.now();
             })
         },
-        clearValidation() {
+        clearFormValidationErrors() {
             let s = this.form.selected;
             if (s === '' || s === undefined || s === null) {
                 this.$refs.form.resetValidation();
@@ -135,11 +144,25 @@ let select_provider = {
              */
             let s = this.form.selected;
             if (s === '' || s === undefined || s === null) {
-                setTimeout(this.clearValidation, time);
+                setTimeout(this.clearFormValidationErrors, time);
             };
         },
         providerChanged(val) {
             this.$emit('provider-changed', val);
+        },
+        handleToggle(val) {
+            let v = String(val);
+            if (v === "true") {
+                this.useCurrentIp = true;
+                /**
+                 * If validaion errors are active when 'use current ip'
+                 * is toggled, this removes those displayed errors on JUST
+                 * the host-ip field.
+                 */
+                this.$refs.host_ip_field.resetValidation();
+            } else {
+                this.useCurrentIp = false;
+            }
         },
         generateMap() {
             /**
