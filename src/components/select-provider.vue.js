@@ -9,17 +9,15 @@ let select_provider = {
                             <v-layout justify-center wrap>
                                 <v-flex xs12 md4>
                                     <v-select
-                                        v-model="form.selected"
-                                        label="Select API Provider"
-                                        @change="providerChanged"
-                                        @focusout="ifValidationErrorClearAfter(3000)"
-                                        @click:clear="clearSelection"
+                                        v-model='dropdown.selected'
+                                        :label='dropdown.label'
+                                        @click:clear="resetFormUniqueKey"
                                         :items="apiProviders"
                                         item-text="name" 
                                         clearable 
                                         return-object
                                         persistent-hint
-                                        hint="<small><i class='mdi mdi-key red--text'></i> means API key is required</small>"
+                                        :hint='dropdown.hint'
                                         required
                                         :rules="rules.requiredField"
                                     >
@@ -35,7 +33,8 @@ let select_provider = {
                                 </v-flex>
                                 <v-flex v-if="showApiKeyField" xs12 md4>
                                     <v-text-field
-                                        label="API Key"
+                                        :label='fields.apiKey.label'
+                                        v-model='fields.apiKey.value'
                                         hide-details
                                         clearable
                                         required
@@ -44,19 +43,20 @@ let select_provider = {
                                 </v-flex>
                                 <v-flex v-if="showHostIpField" xs12 md4>
                                     <v-text-field                                        
-                                        label="Hostname or IP"
+                                        :label='fields.hostIp.label'
+                                        v-model='fields.hostIp.value'
                                         hide-details
                                         clearable
                                         required
                                         :rules="rules.requiredField"
-                                        :disabled='useCurrentIp'
+                                        :disabled='toggle.checked'
                                         ref='host_ip_field'
                                     ></v-text-field>
                                     <ipm-use-current-ip-toggle
                                         :label='toggle.label'
                                         :labelFontSize='toggle.fontSize'
                                         :height='toggle.height'
-                                        @switch-toggled='handleToggle'
+                                        v-model='toggle.checked'
                                     ></ipm-use-current-ip-toggle>
                                 </v-flex>
                             </v-layout>
@@ -98,71 +98,53 @@ let select_provider = {
                 label: 'Use Current IP',
                 height: 4,
                 fontSize: 11,
+                checked: false,
             },
             form: {
                 key: Date.now(),
                 valid: false,
+            },
+            dropdown: {
                 selected: '',
+                label: 'Select API Provider',
+                hint: `<small><i class='mdi mdi-key red--text'></i> means API key is required</small>`,
+            },
+            fields: {
+                hostIp: {
+                    value: '',
+                    label: 'Hostname or IP',
+                },
+                apiKey: {
+                    value: '',
+                    label: 'API Key',
+                },
             },
             rules: {
                 requiredField: [
-                    (v) => !!v || "This field is required!",
+                    (v) => { 
+                        if (this.toggle.checked) return true;
+                        return !!v || "This field is required!";
+                    },
                 ]
             },
-            useCurrentIp: false,
+        }
+    },
+    watch: {
+        'toggle.checked'() {            
+            if (this.fields.hostIp.value !== '') this.fields.hostIp.value = '';
+            this.$refs.host_ip_field.resetValidation();
+        },
+        'dropdown.selected'() {
+            this.$emit('provider-changed', this.dropdown.selected);
         }
     },
     methods: {
-        clearSelection() {
-            this.resetFormUniqueKey();
-            this.useCurrentIp = false;
-        },
         resetFormUniqueKey() {
-            /**
-             * Had issues with resetting validation errors on click:clear.
-             * Had to reset the rendered component :key, which re-renders the
-             * form, thus all validation errors are cleared.
-             * 
-             * This had to be done using a promise so the DOM could render 
-             * before mutation.
-             */
+            console.log('resetFormUniqueKey()');
             this.$nextTick().then(() => {
                 this.form.key = Date.now();
             })
-        },
-        clearFormValidationErrors() {
-            let s = this.form.selected;
-            if (s === '' || s === undefined || s === null) {
-                this.$refs.form.resetValidation();
-            }
-        },
-        ifValidationErrorClearAfter(time) {
-            /**
-             * Checks if the selection is null/empty after focusout
-             * and resets form validation after 'time' seconds so the error
-             * doesnt just sit there forever.
-             */
-            let s = this.form.selected;
-            if (s === '' || s === undefined || s === null) {
-                setTimeout(this.clearFormValidationErrors, time);
-            };
-        },
-        providerChanged(val) {
-            this.$emit('provider-changed', val);
-        },
-        handleToggle(val) {
-            let v = String(val);
-            if (v === "true") {
-                this.useCurrentIp = true;
-                /**
-                 * If validaion errors are active when 'use current ip'
-                 * is toggled, this removes those displayed errors on JUST
-                 * the host-ip field.
-                 */
-                this.$refs.host_ip_field.resetValidation();
-            } else {
-                this.useCurrentIp = false;
-            }
+            this.toggle.checked = false;
         },
         generateMap() {
             /**

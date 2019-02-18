@@ -4,7 +4,6 @@ let use_current_ip_toggle = {
         ref="toggler"
         :height='height'
         :label='label'
-        @change='handleToggled'
         v-model='state'
     ></v-switch>    
     `,
@@ -14,26 +13,31 @@ let use_current_ip_toggle = {
             default: '',
         },
         labelFontSize: {
-            type: String | Number,
+            type: [String, Number],
             default: 12,
         },
         height: {
-            type: String | Number,
+            type: [String, Number],
             default: '',
         },
+        value: {
+            type: Boolean,
+            default: false,
+        },
     },
-    data() {
-        return {
-            state: false,
-        }
-    },
+    data() { return {}},
     computed: {
+        state: {
+            get() {
+                return this.value;
+            },
+            set(state) {
+                this.$emit('input', state);
+            }
+        },
         setToggleLabelTextSize() {
             this.$refs.toggler.$el.querySelector('label')
                 .style.fontSize = this.labelFontSize + 'px';
-        },
-        handleToggled() {
-            this.$emit('switch-toggled', this.state.toString());
         },
     },
     mounted() {
