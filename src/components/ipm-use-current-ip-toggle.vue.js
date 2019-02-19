@@ -13,22 +13,17 @@ let ipm_use_current_ip_toggle = {
     ></v-switch>    
     `,
     props: {
-        label: {
-            type: String,
-            default: '',
-        },
-        labelFontSize: {
-            type: [String, Number],
-            default: 12,
-        },
-        height: {
-            type: [String, Number],
-            default: '',
-        },
         value: {
             type: Boolean,
             default: false,
         },
+    },
+    data() {
+        return {
+            label: 'Use Current IP',
+            height: 4,
+            fontSize: 11,
+        }
     },
     computed: {
         state: {
@@ -40,8 +35,7 @@ let ipm_use_current_ip_toggle = {
             }
         },
         setToggleLabelTextSize() {
-            this.$refs.toggler.$el.querySelector('label')
-                .style.fontSize = this.labelFontSize + 'px';
+            this.$refs.toggler.$el.querySelector('label').style.fontSize = this.fontSize + 'px';
         },
     },
     mounted() {

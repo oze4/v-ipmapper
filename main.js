@@ -1,9 +1,9 @@
 var myvm = new Vue({
     el: '#root',    
-    create() {
+    beforeMount() {
         if (location.protocol === 'file:') {
             //location.replace("http://" + location.hostname);
-            this.snackbar.isShown = true;
+            this.isSnackbarShown = true;
         }
     },
     components: {
@@ -14,26 +14,19 @@ var myvm = new Vue({
     template: `
     <v-app>
         <v-content :style="{ height: content.calculatedHeight + 'px' }">
-            <ipm-snackbar></ipm-snackbar>
+            <ipm-snackbar v-model='isSnackbarShown'></ipm-snackbar>
             <ipm-topbar :extension-height="topbarExtension.height"></ipm-topbar>
             <ipm-select-provider-form></ipm-select-provider-form>
         </v-content>
     </v-app>
     `,
     data: {
-        provider: {
-            selected: '',        
-        },
+        isSnackbarShown: false,
         content: {
             calculatedHeight: 0,
         },
         topbarExtension: {
             height: 300,
-        },
-    },
-    computed: {
-        snackbarClose() {
-            this.snackbar.isShown = false;
         },
     },
     created() {

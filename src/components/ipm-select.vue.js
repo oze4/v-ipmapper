@@ -1,4 +1,4 @@
-let ipm_select_provider = {
+let ipm_select = {
     template: `
     <v-select 
         v-model='selectedProvider' 
