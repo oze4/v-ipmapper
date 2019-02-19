@@ -1,7 +1,7 @@
 var myvm = new Vue({
     el: '#root',    
     beforeMount() {
-        if (location.protocol === 'file:') {
+        if (location.protocol === 'https:') {
             //location.replace("http://" + location.hostname);
             this.isSnackbarShown = true;
         }
