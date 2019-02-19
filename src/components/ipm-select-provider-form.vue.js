@@ -1,7 +1,7 @@
-var select_provider = {
+var ipm_select_provider_form = {
     components: {
-        'ipm-use-current-ip-toggle': use_current_ip_toggle,
-        'ipm-select': ipm_select,
+        'ipm-use-current-ip-toggle': ipm_use_current_ip_toggle,
+        'ipm-select': ipm_select_provider,
     },
     template: `
     <v-container>
@@ -139,18 +139,16 @@ var select_provider = {
             this.$refs.form.reset();            
         },
         generateMap() {
-            var a;
-            var p;
-            var h;
-            p = this.fields.dropdown.selected;
+            var a,h,sa,p = this.fields.dropdown.selected;
             if (this.fields.apiKey.show) {
                 a = this.fields.apiKey.value;
                 h = this.fields.hostIp.value;
-                alert('provider: '+p.name+' | host: '+h+' | apiKey: '+a);
+                sa = String('provider: '+p.name+' | host: '+h+' | apiKey: '+a);
             } else {
                 h = this.fields.hostIp.value;
-                alert('provider: '+p.name+' | host: '+h);
-            }            
+                sa = String('provider: '+p.name+' | host: '+h);
+            }
+            alert(sa);
             /**
              * TODO
              */

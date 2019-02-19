@@ -1,4 +1,9 @@
-let use_current_ip_toggle = {
+let ipm_use_current_ip_toggle = {
+    /**
+     * This had to be its own component because I couldnt
+     * figure out how to set the font size on the label 
+     * for the toggler.
+     */
     template: `
     <v-switch
         ref="toggler"
@@ -25,7 +30,6 @@ let use_current_ip_toggle = {
             default: false,
         },
     },
-    data() { return {}},
     computed: {
         state: {
             get() {

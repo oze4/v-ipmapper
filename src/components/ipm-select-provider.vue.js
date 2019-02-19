@@ -1,4 +1,4 @@
-let ipm_select = {
+let ipm_select_provider = {
     template: `
     <v-select 
         v-model='selectedProvider' 
@@ -44,12 +44,7 @@ let ipm_select = {
                 hint: `<small><i class='mdi mdi-key red--text'></i> means API key is required</small>`,
             },
             rules: {
-                requiredField: [
-                    (v) => {
-                        //if (this.toggle.checked) return true;
-                        return !!v || "This field is required!";
-                    },
-                ]
+                requiredField: [(v) => !!v || "This field is required!"]
             },
         }
     },

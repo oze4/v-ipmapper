@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>v-ipmapper</title>
-    <meta name="description" content="Geo-map public IP addresses">
+    <title>Vue IP Mapper</title>
+    <meta name="description" content="Geo-Map Public IP Addresses">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="16x16" href="./docs/img/vue.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons">
@@ -17,17 +17,18 @@
 <body>
 
     <div id="root" v-cloak>
-        <!-- built files will be auto-injected -->
+        <!-- built files will be auto-injected -->        
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
 
-    <script src="./src/components/topbar.vue.js"></script>
-    <script src="./src/components/ipm-select.vue.js"></script>
-    <script src="./src/components/use-current-ip-toggle.vue.js"></script>
-    <script src="./src/components/select-provider.vue.js"></script>
+    <script src="./src/components/ipm-topbar.vue.js"></script>
+    <script src="./src/components/ipm-snackbar.vue.js"></script>
+    <script src="./src/components/ipm-select-provider.vue.js"></script>
+    <script src="./src/components/ipm-use-current-ip-toggle.vue.js"></script>
+    <script src="./src/components/ipm-select-provider-form.vue.js"></script>
     <script src="./main.js"></script>
 
 </body>
