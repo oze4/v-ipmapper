@@ -43,6 +43,5 @@ let use_current_ip_toggle = {
     mounted() {
         this.setToggleLabelTextSize;
     },
-    methods: {
-    }
+    methods: {}
 };
