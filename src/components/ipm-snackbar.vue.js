@@ -83,7 +83,6 @@ let ipm_snackbar = {
                 if(this.progress.value <= 0) {
                     this.isShown = false;
                 };
-                console.log('tic');
                 this.progress.value -= factor;
             }, step);
         }
