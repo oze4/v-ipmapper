@@ -6,6 +6,13 @@ var myvm = new Vue({
             location.replace("http://" + location.hostname);
         }
     },
+    created() {
+        window.addEventListener('resize', this.handleResize)
+        this.handleResize();
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.handleResize)
+    },
     mounted() {
         function redirectionCheck(vm) { 
             let cookie = Cookies.get('____vipmapperredirection____');
@@ -38,13 +45,6 @@ var myvm = new Vue({
         topbarExtension: {
             height: 300,
         },
-    },
-    created() {
-        window.addEventListener('resize', this.handleResize)
-        this.handleResize();
-    },
-    destroyed() {
-        window.removeEventListener('resize', this.handleResize)
     },
     methods: {
         handleResize() {
