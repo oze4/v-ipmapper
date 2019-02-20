@@ -38,7 +38,7 @@ let ipm_snackbar = {
                 color: 'info',
                 message: "You have been redirected from https to http due to Mixed Content issues",
                 multi: true,
-                timeout: 0, // means it will stay until closed
+                timeout: 0, // 0 means it will stay until closed
                 button: {
                     message: 'Close',
                 },
