@@ -1,6 +1,6 @@
-if (location.protocol === 'https:') {
+if (location.protocol === "https:") {
     Cookies.set('____vipmapperredirection____', 'true', 1);
-    location.protocol.replace('http://' + location.hostname);
+    location.replace("http://" + location.hostname);
 }
 
 var myvm = new Vue({
