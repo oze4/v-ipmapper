@@ -56,6 +56,8 @@ let ipm_snackbar = {
         value() {
             if (this.value){
                 this.doProgressBar();
+            } else {
+                clearInterval(this.progress.interval);
             }
         }
     },
@@ -79,9 +81,9 @@ let ipm_snackbar = {
 
             this.progress.interval = setInterval(() => {
                 if(this.progress.value <= 0) {
-                    clearInterval(this.progress.interval);
                     this.isShown = false;
                 };
+                console.log('tic');
                 this.progress.value -= factor;
             }, step);
         }
