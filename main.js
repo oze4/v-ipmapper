@@ -10,30 +10,30 @@ var myvm = new Vue({
         window.addEventListener('resize', this.handleResize)
         this.handleResize();
     },
-    destroyed() {
-        window.removeEventListener('resize', this.handleResize)
-    },
     mounted() {
         function redirectionCheck(vm) { 
-            let cookie = Cookies.get('____vipmapperredirection____');
-            if(cookie === 'true'){
+            if((Cookies.get('____vipmapperredirection____')) === 'true'){
                 vm.isSnackbarShown = true;
             }
             Cookies.remove('____vipmapperredirection____');
         }
         setTimeout(redirectionCheck, 300, this);
     },
+    destroyed() {
+        window.removeEventListener('resize', this.handleResize)
+    },
     components: {
         'ipm-snackbar': ipm_snackbar,
         'ipm-topbar': ipm_topbar,
         'ipm-select-provider-form': ipm_select_provider_form,
+        'ipm-generate-map': ipm_generate_map,
     },
     template: `
     <v-app>
         <v-content :style="{ height: content.calculatedHeight + 'px' }">
             <ipm-snackbar v-model='isSnackbarShown'></ipm-snackbar>
             <ipm-topbar :extension-height="topbarExtension.height"></ipm-topbar>
-            <ipm-select-provider-form></ipm-select-provider-form>
+            <ipm-select-provider-form></ipm-select-provider-form>            
         </v-content>
     </v-app>
     `,

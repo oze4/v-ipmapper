@@ -2,57 +2,63 @@ var ipm_select_provider_form = {
     components: {
         'ipm-use-current-ip-toggle': ipm_use_current_ip_toggle,
         'ipm-select': ipm_select,
+        'ipm-generate-map': ipm_generate_map,
     },
     template: `
-    <v-container>
-        <v-layout justify-center wrap>
-            <v-flex xs12 md10>
-                <v-card class="elevation-10">
-                    <v-form v-model='form.valid' ref='form'>
-                        <v-container>
-                            <v-layout justify-center wrap>
-                                <v-flex xs12 md4>
-                                    <ipm-select
-                                        v-model='selectedProvider'  
-                                        @ipm-cleared='resetForm'                                      
-                                    ></ipm-select>
-                                </v-flex>
-                                <v-flex v-if="fields.hostIp.show" xs12 md4>
-                                    <v-text-field                                        
-                                        :label='fields.hostIp.label'
-                                        v-model='fields.hostIp.value'
-                                        hide-details clearable required
-                                        :rules="rules.requiredField"
-                                        :disabled='toggle.checked'
-                                        ref='host_ip_field'
-                                    ></v-text-field>
-                                    <ipm-use-current-ip-toggle
-                                        v-model='toggle.checked'
-                                    ></ipm-use-current-ip-toggle>
-                                </v-flex>                                
-                                <v-flex v-if="fields.apiKey.show" xs12 md4>
-                                    <v-text-field
-                                        :label='fields.apiKey.label'
-                                        v-model='fields.apiKey.value'
-                                        hide-details clearable required
-                                        :rules="rules.requiredField"
-                                    ></v-text-field>
-                                </v-flex>                                
-                            </v-layout>
-                        </v-container>
-                    </v-form>
-                </v-card>
-                <v-container class="text-xs-center">
-                    <v-btn
-                        @click="generateMap" 
-                        v-ripple 
-                        color="green"
-                        :disabled="!form.valid"
-                    >{{ form.button.text }}</v-btn>
-                </v-container>
-            </v-flex>
-        </v-layout>
-    </v-container>
+    <div>
+        <v-container>
+            <v-layout justify-center wrap>
+                <v-flex xs12 md10>
+                    <v-card class="elevation-10">
+                        <v-form v-model='form.valid' ref='form'>
+                            <v-container>
+                                <v-layout justify-center wrap>
+                                    <v-flex xs12 md4>
+                                        <ipm-select
+                                            v-model='selectedProvider'  
+                                            @ipm-cleared='resetForm'                                      
+                                        ></ipm-select>
+                                    </v-flex>
+                                    <v-flex v-if="fields.hostIp.show" xs12 md4>
+                                        <v-text-field                                        
+                                            :label='fields.hostIp.label'
+                                            v-model='fields.hostIp.value'
+                                            hide-details clearable required
+                                            :rules="rules.requiredFieldWithToggle"
+                                            :disabled='toggle.checked'
+                                            ref='host_ip_field'
+                                        ></v-text-field>
+                                        <ipm-use-current-ip-toggle
+                                            v-model='toggle.checked'
+                                        ></ipm-use-current-ip-toggle>
+                                    </v-flex>                                
+                                    <v-flex v-if="fields.apiKey.show" xs12 md4>
+                                        <v-text-field
+                                            :label='fields.apiKey.label'
+                                            v-model='fields.apiKey.value'
+                                            hide-details clearable required
+                                            :rules="rules.requiredField"
+                                        ></v-text-field>
+                                    </v-flex>                                
+                                </v-layout>
+                            </v-container>
+                        </v-form>
+                    </v-card>
+                    <v-container class="text-xs-center">
+                        <v-btn
+                            @click="generateMap" 
+                            v-ripple 
+                            color="green"
+                            :disabled="!form.valid"
+                        >{{ form.button.text }}</v-btn>
+                    </v-container>
+                </v-flex>
+            </v-layout>
+        </v-container>
+        <ipm-generate-map
+            :options='map.options'
+        ></ipm-generate-map>
+    </div>
     `,
     props: {
         showApiKeyField: {
@@ -65,7 +71,7 @@ var ipm_select_provider_form = {
         },
     },
     mounted() {
-        
+
     },
     data() {
         return {
@@ -94,19 +100,24 @@ var ipm_select_provider_form = {
                 checked: false,
             },
             rules: {
-                requiredField: [
+                requiredField: [(v) => !!v || "This field is required!"],
+                requiredFieldWithToggle: [
                     (v) => {
-                        if (this.toggle.checked && !this.fields.apiKey.show) return true;
-                        return !!v || "This field is required!";
-                    },
-                ]
+                        if (this.toggle.checked) return true;
+                        return !!v || "This field is required!"
+                    }
+                ],
+            },
+            map: {
+                show: false,
+                options: {},
             },
         }
     },
     computed: {
         selectedProvider: {
             get() {
-                return this.fields.dropdown.selected
+                return this.fields.dropdown.selected;
             },
             set(provider) {
                 if (provider !== '' && provider !== undefined) {
@@ -130,22 +141,16 @@ var ipm_select_provider_form = {
         resetForm() {
             this.fields.hostIp.value = '';
             this.fields.apiKey.value = '';
-            this.$refs.form.reset();            
+            this.$refs.form.reset();
         },
         generateMap() {
-            var a,h,sa,p = this.fields.dropdown.selected;
-            if (this.fields.apiKey.show) {
-                a = this.fields.apiKey.value;
-                h = this.fields.hostIp.value;
-                sa = String('provider: '+p.name+' | host: '+h+' | apiKey: '+a);
-            } else {
-                h = this.fields.hostIp.value;
-                sa = String('provider: '+p.name+' | host: '+h);
-            }
-            alert(sa);
-            /**
-             * TODO
-             */
+            let selectedOptions = {
+                provider: this.fields.dropdown.selected,
+                host: this.toggle.checked === true ? '_current_' : this.fields.hostIp.value,
+                apiKey: this.fields.apiKey.show === true ? this.fields.apiKey.value : false,
+            };
+            this.map.options = selectedOptions;
+            //this.map.show = true;
         },
     },
 };
