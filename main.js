@@ -1,8 +1,14 @@
 var myvm = new Vue({
-    el: '#root',    
-    beforeMount() {
+    el: '#root',
+    beforeCreate() {
         if (location.protocol === 'https:') {
-            //location.replace("http://" + location.hostname);
+            Cookies.set('____vipmapperredirection____', 'true', 1);
+            location.protocol.replace('http://' + location.hostname);
+        }
+    },
+    mounted() {
+        let cookie = Cookies.get('____vipmapperredirection____')
+        if(cookie === 'true'){
             this.isSnackbarShown = true;
         }
     },
