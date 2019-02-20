@@ -11,13 +11,12 @@ var myvm = new Vue({
         this.handleResize();
     },
     mounted() {
-        function redirectionCheck(vm) { 
-            if((Cookies.get('____vipmapperredirection____')) === 'true'){
+        setTimeout((vm) => {
+            if ((Cookies.get('____vipmapperredirection____')) === 'true') {
                 vm.isSnackbarShown = true;
             }
             Cookies.remove('____vipmapperredirection____');
-        }
-        setTimeout(redirectionCheck, 300, this);
+        }, 300, this);
     },
     destroyed() {
         window.removeEventListener('resize', this.handleResize)
