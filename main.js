@@ -7,7 +7,8 @@ var myvm = new Vue({
         }
     },
     mounted() {
-        let cookie = Cookies.get('____vipmapperredirection____')
+        let cookie = Cookies.get('____vipmapperredirection____');
+        Cookies.remove('____vipmapperredirection____');
         if(cookie === 'true'){
             this.isSnackbarShown = true;
         }
