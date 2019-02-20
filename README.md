@@ -1,4 +1,4 @@
 # [v-ipmapper](http://v-ipmapper.ostrike.com)
-Map public IP addresses using Vue.js
+Geo-Map Public IP Addresses Using Vue.js, Vuetify, and Leaflet.js
 
 *My Vue.js learning experience*
