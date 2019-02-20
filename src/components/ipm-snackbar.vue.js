@@ -9,17 +9,14 @@ let ipm_snackbar = {
         left 
         multi-line 
         auto-height 
-    >   
-        {{ snackbar.message }}
+    >{{ snackbar.message }}
 
         <v-btn 
             :ripple=false 
             @click='isShown = false'
             dark 
             flat 
-        >
-            {{ snackbar.button.message }}
-        </v-btn>
+        >{{ snackbar.button.message }}</v-btn>
 
         <v-progress-linear 
             :active='progress.active'
@@ -41,15 +38,16 @@ let ipm_snackbar = {
                 color: 'info',
                 message: "You have been redirected from https to http due to Mixed Content issues",
                 multi: true,
-                timeout: 6000,
+                timeout: 0,
                 button: {
                     message: 'Close',
                 },
             },
             progress: {
+                timeout: 6000,
                 active: true,
-                value: 100,
-                color: 'success',
+                value: 0,
+                color: 'green',
                 interval: 0,
             },
         }
@@ -57,7 +55,7 @@ let ipm_snackbar = {
     watch: {
         value() {
             if (this.value){
-                this.countdown();
+                this.doProgressBar();
             }
         }
     },
@@ -72,10 +70,20 @@ let ipm_snackbar = {
         }
     },
     methods: {
-        countdown() {
-            setInterval(() => {
-                this.progress.value -= 17;
-            }, 1000);
+        doProgressBar() {
+            this.progress.value = 99; // ensure our progress bar is 'full'
+            let step = 100, // how often to update progress bar
+                totalTime = this.progress.timeout,
+                chunk = totalTime / step,
+                factor = 100 / chunk;
+
+            this.progress.interval = setInterval(() => {
+                if(this.progress.value <= 0) {
+                    clearInterval(this.progress.interval);
+                    this.isShown = false;
+                };
+                this.progress.value -= factor;
+            }, step);
         }
     },
 }
