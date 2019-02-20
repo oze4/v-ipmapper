@@ -26,7 +26,6 @@ var myvm = new Vue({
         'ipm-snackbar': ipm_snackbar,
         'ipm-topbar': ipm_topbar,
         'ipm-select-provider-form': ipm_select_provider_form,
-        'ipm-generate-map': ipm_generate_map,
     },
     template: `
     <v-app>
