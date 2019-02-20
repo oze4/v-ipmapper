@@ -18,7 +18,8 @@ class Cookies {
 	static set (name, value, hours) {
 		if (hours > 0) {
             let now = new Date();
-            let date = now.setTime(now.getTime() + hours * 3600 * 1000).toUTCString();
+            now.setTime(now.getTime() + hours * 3600 * 1000)
+            let date = now.toUTCString();
 			document.cookie = name + `=${encodeURIComponent(value)}; expires=${date}; path=/`;
 		} else {		
 			document.cookie = name + `=${encodeURIComponent(value)}; path=/`
