@@ -7,11 +7,14 @@ var myvm = new Vue({
         }
     },
     mounted() {
-        let cookie = Cookies.get('____vipmapperredirection____');
-        if(cookie === 'true'){
-            this.isSnackbarShown = true;
+        function r(vm) { 
+            let cookie = Cookies.get('____vipmapperredirection____');
+            if(cookie === 'true'){
+                vm.isSnackbarShown = true;
+            }
+            Cookies.remove('____vipmapperredirection____');
         }
-        Cookies.remove('____vipmapperredirection____');
+        setTimeout(r,1000,this);
     },
     components: {
         'ipm-snackbar': ipm_snackbar,
