@@ -31,3 +31,7 @@
 [v-cloak]>* {
     display: none;
 }
+
+#map-card {
+    z-index: 0;
+}
