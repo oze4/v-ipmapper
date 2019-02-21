@@ -6,6 +6,7 @@ let ipm_generate_map = {
 
             <v-flex xs10 sm10 md10 lg10>
                 <v-card style='overflow-x:auto;' ref='map_container' id='map-container'>
+                    <v-card-title class='justify-center'><h3>Click Marker For More Info</h3></v-card-title>
                     <div id='map-card' ref='map_card'></div>
                 </v-card>
             </v-flex>
