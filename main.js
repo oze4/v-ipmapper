@@ -32,7 +32,7 @@ var myvm = new Vue({
             <ipm-snackbar v-model='isSnackbarShown'></ipm-snackbar>
             <ipm-topbar :extension-height="topbarExtension.height"></ipm-topbar>
             <ipm-select-provider-form></ipm-select-provider-form>            
-        </v-content>
+        </v-content>        
     </v-app>
     `,
     data: {
