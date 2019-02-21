@@ -18,9 +18,8 @@ let ipm_generate_map = {
 
             <v-flex xs10 sm10 md10 lg10>
                 <v-card style='overflow-x:auto;'>
-                    <!--<div id='map-display'></div>-->
                     <v-card-text>
-                        <pre>{{ jsonResponse }}</pre>
+                        <div id='map-card'></div>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -46,6 +45,8 @@ let ipm_generate_map = {
         return {
             isShown: false,
             response: '',
+            overlay: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         };
     },
     watch: {
@@ -59,21 +60,33 @@ let ipm_generate_map = {
         mapData(data) {
             // this is here to verify what we are being given
             switch (data.provider.name) {
-
                 case "http://ip-api.com":
                     {
                         // No API key required here, but lets verify
                         if (data.provider.isKeyRequired === false) {
                             let h = data.host === '_current_' ? '' : data.host;
                             let u = `http://ip-api.com/json/${String(h)}`;
-                            axios.get(u).then((response) => {
-                                this.response = response.data;
+
+                            axios.get(u).then((res) => {
+
+                                this.isShown = true;
+                                this.response = res.data;
+                                let lat = this.response.lat;
+                                let long = this.response.lon;
+                                let displayElement = 'map-card';
+                                
+                                let map = L.map(displayElement).setView([lat, long], 13);
+                                L.tileLayer(this.overlay, {
+                                    attribution: this.attribution
+                                }).addTo(map);
+                                L.marker([lat, long]).addTo(map);
+
                             }).catch((err) => {
                                 alert(`Unable to gather map data from ${u}! We encountered the following error: ${err.error}`);
                             });
-
-                            this.isShown = true;
+                            
                         }
+
                     }
 
                 case "http://ipstack.com":
@@ -85,8 +98,6 @@ let ipm_generate_map = {
                     }
 
             };
-
-            // this.isShown = true;
         }
     },
 }
