@@ -1,4 +1,4 @@
-var myvm = new Vue({
+const myvm = new Vue({
     el: '#root',
     beforeCreate() {
         if (location.protocol === "https:") {
