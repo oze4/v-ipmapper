@@ -30,7 +30,11 @@ let ipm_generate_map = {
             return JSON.stringify(this.response, undefined, 2);
         },
         mapHeight() {
-            this.applyLeafletFix();
+            if (this.map.object !== null) {
+                setTimeout((vm) => {
+                    vm.map.object.invalidateSize();
+                }, 200, this);
+            }
             return this.$vuetify.breakpoint.height - 125;
         },
         popUpMessage() {
@@ -77,11 +81,10 @@ let ipm_generate_map = {
                 maxHeight: "auto"
             }).addTo(this.map.object);
 
-        },
-        applyLeafletFix() {
             setTimeout((vm) => {
                 vm.map.object.invalidateSize();
             }, 200, this);
+
         },
         clearMap() {
             if (this.map.object !== null) {
@@ -102,7 +105,6 @@ let ipm_generate_map = {
                                 this.isShown = true;
                                 let ip = res.data.query;
                                 this.initMap(res, ip, res.data.lat, res.data.lon);
-                                this.applyLeafletFix();
                             }).catch((err) => {
                                 alert(`Unable to gather map data from ${u}! We encountered the following error: ${err}`);
                             });
@@ -120,7 +122,6 @@ let ipm_generate_map = {
                                 this.isShown = true;
                                 let ip = res.data.ip;
                                 this.initMap(res, ip, res.data.latitude, res.data.longitude);
-                                this.applyLeafletFix();
                             }).catch((err) => {
                                 alert(`Unable to gather map data from ${u}! We encountered the following error: ${err}`);
                             });
