@@ -91,8 +91,8 @@ let ipm_generate_map = {
                     {
                         // No API key required here, but lets verify
                         if (data.provider.isKeyRequired === false) {
-                            let h = data.host === '_current_' ? '' : data.host;
-                            let u = `http://ip-api.com/json/${String(h)}`;
+                            let h = data.host === '_current_' ? '' : `/${data.host}`; // cannot send request with trailing "/"
+                            let u = `http://ip-api.com/json${String(h)}`;
                             axios.get(u).then((res) => {
                                 this.buildMap(
                                     res,
