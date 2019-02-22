@@ -105,7 +105,6 @@ let ipm_generate_map = {
                                 this.applyLeafletFix();
                             }).catch((err) => {
                                 alert(`Unable to gather map data from ${u}! We encountered the following error: ${err}`);
-                                this.isShown = false;
                             });
                         }
                     }
@@ -124,7 +123,6 @@ let ipm_generate_map = {
                                 this.applyLeafletFix();
                             }).catch((err) => {
                                 alert(`Unable to gather map data from ${u}! We encountered the following error: ${err}`);
-                                this.isShown = false;
                             });
                         }
                     }
