@@ -1,10 +1,4 @@
 let ipm_generate_map = {
-    /**
-     * 
-     * I am only temporarily using jQuery in here for testing
-     * and bc f*ck Axios and issues with 307
-     * 
-     */
     template: `
     <div :style='{ display: shown }'>
         <v-layout row wrap justify-center mb-5>
@@ -58,10 +52,12 @@ let ipm_generate_map = {
         buildMap(res, ip, lat, lon) {
             this.clearMap();
             this.isShown = true;
-            this.response = res;
+            this.response = res.data;
 
             this.map = L.map('map-card')
-                .setView([lat, lon], 13);
+                .setView([lat, lon], 13)
+                
+            this.map.scrollWheelZoom.disable();
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -72,9 +68,14 @@ let ipm_generate_map = {
             L.marker([lat, lon], {
                 title: `IP: ${ip} | lat: ${lat} | lon: ${lon}`,
                 riseOnHover: true,
-            }).bindPopup(`IP Information:<br/><pre>${this.jsonResponse}</pre>`, {
-                maxWidth: "auto",
-                maxHeight: "auto"
+            }).bindPopup(`
+                <h3>Host Information:</h3>
+                <v-card>
+                    <pre style='overflow-x:auto;overflow-y:auto'>${this.jsonResponse}</pre>
+                </v-card>`, {
+                maxWidth: 200,
+                maxHeight: 200,
+                keepInView: true,
             }).addTo(this.map);
 
             setTimeout((vm) => {
@@ -99,21 +100,11 @@ let ipm_generate_map = {
                         if (data.provider.isKeyRequired === false) {
                             let h = data.host === '_current_' ? '' : `/${data.host}`; // cannot send request with trailing "/"
                             let u = `http://ip-api.com/json${String(h)}`;
-                            var vm = this;
-                            $.ajax(u, {
-                                method: 'get',
-                                success(res) {
-                                    vm.buildMap(res, res.query, res.lat, res.lon);
-                                },
-                                error(err) {
-                                    console.log(err);
-                                },
-                            })
-                            /*axios.get(u).then((res) => {
+                            axios.get(u).then((res) => {
                                 this.buildMap(res, res.data.query, res.data.lat, res.data.lon);
                             }).catch((err) => {
                                 this.handleAxiosError(u, err);
-                            });*/
+                            });
                         }
                     }
 
@@ -123,22 +114,11 @@ let ipm_generate_map = {
                         if (data.provider.isKeyRequired === true) {
                             let h = data.host === '_current_' ? 'check' : data.host;
                             let u = `http://api.ipstack.com/${String(h)}?access_key=${String(data.apiKey)}`;
-                            $.ajax(u, {
-                                method: 'get',
-                                success(res) {
-                                    this.buildMap(res, res.data.ip, res.data.latitude, res.data.longitude);
-                                },
-                                error(err) {
-                                    console.log(err);
-                                },
-                            })
-                            /*
                             axios.get(u).then((res) => {
                                 this.buildMap(res, res.data.ip, res.data.latitude, res.data.longitude);
                             }).catch((err) => {
                                 this.handleAxiosError(u, err);
                             });
-                            */
                         }
                     }
             };
