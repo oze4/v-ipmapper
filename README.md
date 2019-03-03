@@ -3,7 +3,7 @@
 *My Vue.js learning experience [template string single file components - w/o Webpack, Babel or NPM]*
 
 ### Variations of this same concept aka how I got here:
- * *[Vue.js & vue-cli advanced learning experience - with '.vue' single file components, Webpack/Babel/NPM](http://v-ipmapper.ostrike.com)*
+ * *[Vue.js [vue-cli] version - with '.vue' single file components, Webpack/Babel/NPM](http://v-ipmapper.ostrike.com)*
    * *[GitHub](https://github.com/oze4/ipvue)*
    
  * *[jQuery version - my Leaflet.js learning experience](http://ipmapper.ostrike.com)*
