@@ -1,6 +1,6 @@
 # [v-IPMapper - Geo Map Public IP Addresses (via IP or hostname)](http://v-ipmapper.ostrike.com)
 
-*My Vue.js learning experience [template string single file components/no Webpack/Babel/NPM]*
+*My Vue.js learning experience [template string single file components - w/o Webpack, Babel or NPM]*
 
 ### Variations of this same concept aka how I got here:
  * *[Vue.js & vue-cli advanced learning experience - with '.vue' single file components, Webpack/Babel/NPM](http://v-ipmapper.ostrike.com)*
