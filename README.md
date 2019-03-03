@@ -1,4 +1,4 @@
-# [v-IPMapper - Geo Map Public IP Addresses (via IP or hostname)](http://v-ipmapper.ostrike.com)
+# [v-IPMapper | Geo Map Public IP Addresses via IP or hostname](http://v-ipmapper.ostrike.com)
 
 *My Vue.js learning experience [template string single file components - w/o Webpack, Babel or NPM]*
 
