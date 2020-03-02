@@ -1,5 +1,6 @@
 const myvm = new Vue({
     el: '#root',
+    vuetify: new Vuetify(),
     beforeCreate() {
         if (location.protocol === "https:") {
             Cookies.set('____vipmapperredirection____', 'true', 1);

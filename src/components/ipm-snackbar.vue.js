@@ -8,7 +8,6 @@ let ipm_snackbar = {
         top 
         left 
         multi-line 
-        auto-height 
     >{{ snackbar.message }}
 
         <v-btn 

@@ -1,16 +1,16 @@
 let ipm_topbar = {     
     template: `
     <div>
-        <v-toolbar color='primary' dark fixed flat app prominent> 
+        <v-app-bar color='primary' dark fixed flat app prominent> 
             <v-spacer></v-spacer>
             <a :href='logo.url' :rel='logo.rel' target='_blank' style='margin-top:5px;'>
                 <img :src='logo.image' :alt='logo.alt' :style='logo.style'>
             </a>
             <v-spacer></v-spacer>
-        </v-toolbar>
-        <v-toolbar color='primary' dark flat :height='extensionHeight' ref='welcome_message'>
+        </v-app-bar>
+        <v-app-bar color='primary' dark flat :height='extensionHeight' ref='welcome_message'>
             <v-container fill-height>
-                <v-layout text-xs-center row>
+                <v-layout text-center row>
                     <v-flex >
                         <span style='margin-right:30%;'>
                             {{ message.header }}
@@ -24,7 +24,7 @@ let ipm_topbar = {
                     </v-flex>
                 </v-layout>
             </v-container>       
-        </v-toolbar>
+        </v-app-bar>
     </div>
     `,
     props: {

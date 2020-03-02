@@ -44,7 +44,7 @@ var ipm_select_provider_form = {
                             </v-container>
                         </v-form>
                     </v-card>
-                    <v-container class="text-xs-center">
+                    <v-container class="text-center">
                         <v-btn
                             @click="generateMap" 
                             v-ripple 

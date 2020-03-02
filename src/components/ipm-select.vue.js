@@ -13,6 +13,9 @@ let ipm_select = {
         required 
         :rules="rules.requiredField"
     >
+        <template v-slot:message="{message, key}">
+            <div v-html="message" :key="key"></div>
+        </template>
         <template slot="selection" slot-scope="data">
             {{ data.item.name }}
             <span v-if="data.item.isKeyRequired" class="mdi mdi-key red--text"></span>
